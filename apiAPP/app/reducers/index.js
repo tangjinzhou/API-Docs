@@ -1,5 +1,5 @@
-import dash from './dash';
+import search from './search';
 
 export {
-    dash
+    search
 };

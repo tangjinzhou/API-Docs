@@ -9,8 +9,8 @@ import DashApp from './dashApp';
 
 //const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
 const finalCreateStore = compose(
-    applyMiddleware(thunk),
-    devTools({ hostname: 'localhost', port: 8000, name: 'IOS app' })
+    applyMiddleware(thunk)
+    //devTools()
 )(createStore);
 const reducer = combineReducers(reducers);
 const store = finalCreateStore(reducer);
