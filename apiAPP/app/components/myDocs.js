@@ -5,7 +5,7 @@ import React, {
     View,
     StyleSheet,
     ListView,
-    TouchableHighlight,
+    TouchableOpacity,
     Navigator,
     Animated
 } from 'react-native';
@@ -44,7 +44,7 @@ class MyDocs extends Component {
         var {navigator, showResultPage} = this.props;
         return (
             <View>
-                <TouchableHighlight
+                <TouchableOpacity
                     onPress={()=>this.showSearchApiPage(navigator)}
                 >
                     <View>
@@ -56,7 +56,7 @@ class MyDocs extends Component {
                             editable={false}
                         />}
                     </View>
-                </TouchableHighlight>
+                </TouchableOpacity>
                 <CommonList
                     {...this.props}
                     dataSource={dataSource}

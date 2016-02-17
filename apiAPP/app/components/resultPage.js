@@ -13,7 +13,7 @@ class ResultPage extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <SearchText {...this.props} style={styles.searchText}/>
+                <SearchText {...this.props} style={styles.searchText} autoFocus={true}/>
                 <View style={styles.listContainer}>
                     <CommonList
                         {...this.props}

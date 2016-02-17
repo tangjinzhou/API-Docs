@@ -22,12 +22,14 @@ export default function search(state = initialState, action = {}) {
         case types.SHOWRESULTPAGE:
             return {
                 ...state,
-                showResultPage: true
+                showResultPage: true,
+                searchText: ''
             }
         case types.HIDERESULTPAGE:
             return {
                 ...state,
-                showResultPage: false
+                showResultPage: false,
+                searchText: ''
             }
         default:
             return state;

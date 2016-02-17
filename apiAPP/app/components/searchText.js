@@ -14,7 +14,7 @@ export default class SearchText extends Component {
     }
 
     render() {
-        var {dispatchSearchTextChange,dispatchHideResultPage, searchText, editable} = this.props;
+        var {dispatchSearchTextChange,dispatchHideResultPage, searchText, editable,autoFocus} = this.props;
         var editable = editable === false ? false : true;
         return (
             <View style={[styles.searchRow,this.props.style]}>
@@ -28,7 +28,11 @@ export default class SearchText extends Component {
                     value={searchText}
                     editable={editable}
                     onBlur={dispatchHideResultPage}
+                    autoFocus={autoFocus || false}
                 />
+                {editable && <TouchableOpacity onPress={dispatchHideResultPage}>
+                    <Text style={styles.cancelBtn}>取消</Text>
+                </TouchableOpacity>}
             </View>
         );
     }
@@ -70,6 +74,7 @@ var styles = StyleSheet.create({
         lineHeight: 20,
     },
     searchRow: {
+        flexDirection: 'row',
         backgroundColor: '#eeeeee',
         paddingTop: 75,
         paddingLeft: 10,
@@ -77,6 +82,7 @@ var styles = StyleSheet.create({
         paddingBottom: 10,
     },
     searchTextInput: {
+        flex: 1,
         backgroundColor: 'white',
         borderColor: '#cccccc',
         borderRadius: 3,
@@ -84,4 +90,11 @@ var styles = StyleSheet.create({
         paddingLeft: 8,
         height: 30,
     },
+    cancelBtn: {
+        color: '#57B9A3',
+        fontSize: 17,
+        fontWeight: '400',
+        paddingTop: 5,
+        paddingLeft: 10,
+    }
 });
