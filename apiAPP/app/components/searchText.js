@@ -27,7 +27,6 @@ export default class SearchText extends Component {
                     style={styles.searchTextInput}
                     value={searchText}
                     editable={editable}
-                    onBlur={dispatchHideResultPage}
                     autoFocus={autoFocus || false}
                 />
                 {editable && <TouchableOpacity onPress={dispatchHideResultPage}>

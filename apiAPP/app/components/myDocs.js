@@ -21,29 +21,15 @@ class MyDocs extends Component {
     }
 
     getDataSource(searchText) {
-        var getSectionData = (dataBlob, sectionID) => {
-            return dataBlob[sectionID];
-        };
-        var getRowData = (dataBlob, sectionID, rowID) => {
-            return dataBlob[rowID];
-        };
-
-        var dataSource = new ListView.DataSource({
-            getRowData: getRowData,
-            getSectionHeaderData: getSectionData,
-            rowHasChanged: (row1, row2) => row1 !== row2,
-            sectionHeaderHasChanged: (s1, s2) => s1 !== s2,
-        });
-
-
-        return dataSource.cloneWithRowsAndSections(...this._genRows(searchText));
+        var dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+        return dataSource.cloneWithRows(this._genRows());
     }
 
     render() {
         var dataSource = this.getDataSource(this.props.searchText);
         var {navigator, showResultPage} = this.props;
         return (
-            <View>
+            <View style={styles.container}>
                 <TouchableOpacity
                     onPress={()=>this.showSearchApiPage(navigator)}
                 >
@@ -60,6 +46,7 @@ class MyDocs extends Component {
                 <CommonList
                     {...this.props}
                     dataSource={dataSource}
+                    hideSection={true}
                 />
             </View>
         );
@@ -69,23 +56,13 @@ class MyDocs extends Component {
         this.props.dispatchShowResultPage();
     }
 
-    _genRows(searchText) {
-        var dataBlob = {};
-        var sectionIDs = [];
-        var rowIDs = [];
-        for (var ii = 0; ii < 1; ii++) {
-            var sectionName = 'Section ' + ii;
-            sectionIDs.push(sectionName);
-            dataBlob[sectionName] = sectionName;
-            rowIDs[ii] = [];
-
-            for (var jj = 0; jj < 1; jj++) {
-                var rowName = searchText + ii + ', R' + jj;
-                rowIDs[ii].push(rowName);
-                dataBlob[rowName] = rowName;
-            }
+    _genRows() {
+        var dataBlob = [];
+        for (var ii = 0; ii < 100; ii++) {
+            var pressedText = 'hello' + ii;
+            dataBlob.push('Row ' + ii + pressedText);
         }
-        return [dataBlob, sectionIDs, rowIDs];
+        return dataBlob;
     }
 
 }

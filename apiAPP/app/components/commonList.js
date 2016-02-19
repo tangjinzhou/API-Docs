@@ -8,7 +8,8 @@ import React, {
     Text,
     TouchableOpacity,
     TouchableHighlight,
-    RecyclerViewBackedScrollView
+    RecyclerViewBackedScrollView,
+    ScrollView
 } from 'react-native';
 
 var ds = new ListView.DataSource({
@@ -27,18 +28,22 @@ var CommonList = React.createClass({
         console.log(this.props);
         //this._genRows(this.props.searchText);
         var dataSource = this.props.dataSource || this.state.dataSource;
+        var hideSection = this.props.hideSection || false;
+        var listViewProps = {
+            automaticallyAdjustContentInsets: true,
+            keyboardDismissMode: 'on-drag',
+            dataSource: dataSource,
+            renderRow: this._renderRow,
+            initialListSize: 10,
+            renderScrollComponent: props => <RecyclerViewBackedScrollView {...props} />,
+            renderSeparator: (sectionID, rowID) => <View key={`${sectionID}-${rowID}`} style={styles.separator}/>
+        }
+        !hideSection && Object.assign(listViewProps, {renderSectionHeader: this.renderSectionHeader});
+        //listViewProps = !hideSection ? listViewProps.extend({renderSectionHeader: this.renderSectionHeader}): listViewProps;
         return (
-            <View style={styles.container}>
-                <ListView
-                    automaticallyAdjustContentInsets={false}
-                    dataSource={dataSource}
-                    renderRow={this._renderRow}
-                    renderSectionHeader={this.renderSectionHeader}
-                    initialListSize={10}
-                    renderScrollComponent={props => <RecyclerViewBackedScrollView {...props} />}
-                    renderSeparator={(sectionID, rowID) => <View key={`${sectionID}-${rowID}`} style={styles.separator} />}
-                />
-            </View>
+            <ListView
+                {...listViewProps}
+            />
         );
     },
     renderSectionHeader: function (sectionData, sectionID) {
