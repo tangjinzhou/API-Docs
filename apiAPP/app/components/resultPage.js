@@ -12,7 +12,6 @@ class ResultPage extends Component {
 
     render() {
         var dataSource = this.getDataSource(this.props.searchText);
-        console.log(dataSource.getRowCount());
         var listContainerStyles = {};
         if (dataSource.getRowCount() > 0) {
             listContainerStyles.opacity = 1;

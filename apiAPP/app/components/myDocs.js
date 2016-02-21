@@ -13,21 +13,21 @@ import React, {
 import CommonList from './commonList';
 import SearchText from './searchText';
 import SearchAPiPage from './searchApiPage';
-
+import ApiInfo from './apiInfo';
+import listData from './listData';
 
 class MyDocs extends Component {
     constructor(props) {
         super(props);
     }
 
-    getDataSource(searchText) {
-        var dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-        return dataSource.cloneWithRows(this._genRows());
-    }
-
     render() {
-        var dataSource = this.getDataSource(this.props.searchText);
-        var {navigator, showResultPage} = this.props;
+        var {navigator, showResultPage,route} = this.props;
+        var dataSource = listData.getDataSource(route);
+        this.level = route.params.level;
+        this.navigator = navigator;
+        this.title = route.title;
+        console.log(this.level);
         return (
             <View style={styles.container}>
                 <TouchableOpacity
@@ -47,22 +47,34 @@ class MyDocs extends Component {
                     {...this.props}
                     dataSource={dataSource}
                     hideSection={true}
+                    pressRow={this.pressRow.bind(this)}
                 />
             </View>
         );
     }
 
-    showSearchApiPage(navigator) {
-        this.props.dispatchShowResultPage();
+    pressRow(rowData, rowId) {
+        var NavComponent = MyDocs;
+        var leftTitle = this.title;
+        if (this.level == 2) {
+            NavComponent = ApiInfo;
+            leftTitle = '<...'
+        }
+        this.navigator.push({
+            name: rowData,
+            title: rowData,
+            leftTitle: leftTitle,
+            component: NavComponent,
+            params: {
+                level: ++this.level
+            },
+            configureScene: Navigator.SceneConfigs.FloatFromRight
+        })
+
     }
 
-    _genRows() {
-        var dataBlob = [];
-        for (var ii = 0; ii < 100; ii++) {
-            var pressedText = 'hello' + ii;
-            dataBlob.push('Row ' + ii + pressedText);
-        }
-        return dataBlob;
+    showSearchApiPage(navigator) {
+        this.props.dispatchShowResultPage();
     }
 
 }
@@ -74,7 +86,6 @@ var styles = StyleSheet.create({
 
     searchText: {
         paddingTop: 30,
-
     },
 });
 

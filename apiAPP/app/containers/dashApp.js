@@ -33,9 +33,11 @@ class DashApp extends Component {
 
 export default DashApp;
 
-export default connect(state => ({
-        state: state.search
-    }),
+function getState(state) {
+    state = Object.assign({}, state.search);
+    return {state: state}
+}
+export default connect(getState,
     (dispatch) => ({
         actions: bindActionCreators(dashActions, dispatch)
     })

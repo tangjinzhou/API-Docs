@@ -23,16 +23,18 @@ export default class Dash extends Component {
             <Navigator
                 style={styles.navContainer}
                 initialRoute={{
-                    title: 'API Docs',
+                    title: 'Docsets',
                     name: "home",
                     index: 0,
                     component: StartPage,
+                    params: {
+                        level: 0
+                    }
                 }}
                 renderScene={(route, navigator) => {
                     let Component = route.component;
                     if(route.component) {
-                        //这里有个 { ...route.params }
-                        return <Component {...this.props} navigator={navigator} />
+                        return <Component route={route} {...this.props} navigator={navigator} />
                     }
                 }}
                 configureScene={(route) => {
@@ -109,22 +111,14 @@ var NavigationBarRouteMapper = {
     },
 
 };
-
 var styles = StyleSheet.create({
     navContainer: {
         flex: 1,
     },
-    messageText: {
-        fontSize: 17,
-        fontWeight: '500',
-        padding: 15,
-        marginTop: 50,
-        marginLeft: 15,
-    },
     button: {
         backgroundColor: 'white',
         padding: 15,
-        borderBottomWidth: 1 / PixelRatio.get(),
+        borderBottomWidth: 1.5 / PixelRatio.get(),
         borderBottomColor: '#CDCDCD',
     },
     navBarButtonText: {
@@ -134,6 +128,8 @@ var styles = StyleSheet.create({
     },
     navBar: {
         backgroundColor: 'white',
+        borderBottomWidth: 1.5 / PixelRatio.get(),
+        borderBottomColor: '#CDCDCD',
     },
     navBarText: {
         fontSize: 16,

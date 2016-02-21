@@ -5,23 +5,24 @@ export function dispatchSearchTextChange(value) {
         type: types.SEARCHTEXTCHANGE,
         value: value
     };
-};
+}
 
 export function dispatchSearchTypeChange(value) {
   return {
       type: types.SEARCHTYPECHANGE,
       value: value
   }
-};
+}
 
 export function dispatchShowResultPage() {
     return {
         type: types.SHOWRESULTPAGE
     }
-};
+}
 
 export function dispatchHideResultPage() {
     return {
         type: types.HIDERESULTPAGE
     }
 }
+

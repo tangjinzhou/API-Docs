@@ -1,6 +1,5 @@
 import React, {
     Alert,
-    NavigatorIOS,
     StyleSheet,
     Component,
     View,
@@ -9,7 +8,9 @@ import React, {
     TouchableOpacity,
     TouchableHighlight,
     RecyclerViewBackedScrollView,
-    ScrollView
+    ScrollView,
+    Navigator,
+    Image
 } from 'react-native';
 
 var ds = new ListView.DataSource({
@@ -25,10 +26,11 @@ var CommonList = React.createClass({
         };
     },
     render: function () {
-        console.log(this.props);
         //this._genRows(this.props.searchText);
         var dataSource = this.props.dataSource || this.state.dataSource;
         var hideSection = this.props.hideSection || false;
+        this.navigator = this.props.navigator;
+        this.pressRow = this.props.pressRow;
         var listViewProps = {
             automaticallyAdjustContentInsets: true,
             keyboardDismissMode: 'on-drag',
@@ -37,9 +39,8 @@ var CommonList = React.createClass({
             initialListSize: 10,
             renderScrollComponent: props => <RecyclerViewBackedScrollView {...props} />,
             renderSeparator: (sectionID, rowID) => <View key={`${sectionID}-${rowID}`} style={styles.separator}/>
-        }
+        };
         !hideSection && Object.assign(listViewProps, {renderSectionHeader: this.renderSectionHeader});
-        //listViewProps = !hideSection ? listViewProps.extend({renderSectionHeader: this.renderSectionHeader}): listViewProps;
         return (
             <ListView
                 {...listViewProps}
@@ -56,19 +57,24 @@ var CommonList = React.createClass({
         );
     },
 
-    _pressRow: function (rowID) {
-        Alert.alert(
-            'Alert Title',
-            rowID
-        )
+    _pressRow: function (rowData, rowID) {
+        if (typeof this.pressRow == 'function') {
+            this.pressRow(rowData, rowID);
+        }
     },
     _renderRow: function (rowData, sectionID, rowID) {
+        var imgSource = require('../Resources/jQuery.png');
+
         return (
-            <TouchableHighlight onPress={()=>this._pressRow(rowID)}>
+            <TouchableHighlight onPress={()=>this._pressRow(rowData,rowID)}>
                 <View>
                     <View style={styles.row}>
+                        <Image style={styles.thumb} source={imgSource}/>
                         <Text style={styles.text}>
                             {rowData}
+                        </Text>
+                        <Text style={styles.rightArrow}>
+                            >
                         </Text>
                     </View>
                 </View>
@@ -89,12 +95,24 @@ var styles = StyleSheet.create({
         padding: 10,
         backgroundColor: '#F6F6F6',
     },
+    thumb: {
+        borderRadius: 3,
+        marginRight: 5,
+        width: 16,
+        height: 16,
+    },
     separator: {
         height: 1,
         backgroundColor: '#CCCCCC',
     },
     text: {
         flex: 1,
+    },
+    rightArrow: {
+        color: 'grey',
+        fontSize: 16,
+        fontWeight: '400',
+        paddingRight: 10,
     },
     section: {
         flexDirection: 'column',
