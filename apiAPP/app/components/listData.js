@@ -1,5 +1,7 @@
 'use strict';
 import React, {ListView} from 'react-native';
+import RNFS from 'react-native-fs';
+import SQLite from 'react-native-sqlite-storage';
 
 class ListData {
     getDataSource(route) {
@@ -8,6 +10,34 @@ class ListData {
     }
 
     _genRows(title) {
+        console.log(RNFS);
+
+        var errorCB = err => {
+            console.log("SQL Error: " + err);
+        };
+
+        var successCB = () => {
+            console.log("SQL executed fine");
+        };
+
+        var openCB = ()=> {
+            console.log("Database OPENED");
+        };
+        console.log(SQLite);
+        var db = SQLite.openDatabase("docSet.dsidx", openCB, errorCB);
+        db.transaction((tx) => {
+            tx.executeSql('SELECT * FROM searchIndex', [], (tx, results) => {
+                console.log("Query completed");
+
+                var len = results.rows.length;
+                for (let i = 0; i < len; i++) {
+                    let row = results.rows.item(i);
+                    console.log(`Employee name: ${row.name}, Dept Name: ${row.deptName}`);
+                }
+            });
+        });
+
+
         var dataBlob = [];
         for (var ii = 0; ii < 10; ii++) {
             var pressedText = title + ii;
