@@ -10,7 +10,8 @@ import React, {
     RecyclerViewBackedScrollView,
     ScrollView,
     Navigator,
-    Image
+    Image,
+    Dimensions
 } from 'react-native';
 
 var ds = new ListView.DataSource({
@@ -36,7 +37,8 @@ var CommonList = React.createClass({
             keyboardDismissMode: 'on-drag',
             dataSource: dataSource,
             renderRow: this._renderRow,
-            initialListSize: 10,
+            initialListSize: 15,
+            pageSize: 15,
             renderScrollComponent: props => <RecyclerViewBackedScrollView {...props} />,
             renderSeparator: (sectionID, rowID) => <View key={`${sectionID}-${rowID}`} style={styles.separator}/>
         };

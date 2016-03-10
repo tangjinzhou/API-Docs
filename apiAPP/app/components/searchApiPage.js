@@ -3,6 +3,7 @@
 import React, { Component,View,StyleSheet} from 'react-native';
 import CommonList from './commonList';
 import SearchText from './searchText';
+import ApiInfo from './apiInfo';
 
 
 class searchApiPage extends Component {

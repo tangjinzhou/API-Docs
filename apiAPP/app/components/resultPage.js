@@ -1,17 +1,34 @@
 'use strict';
 
-import React, { Component,View,StyleSheet,PixelRatio,Dimensions,ListView} from 'react-native';
+import React, { Component,View,StyleSheet,PixelRatio,Dimensions,ListView,Navigator} from 'react-native';
+import {bindActionCreators} from 'redux';
+import { connect } from 'react-redux';
+
 import CommonList from './commonList';
 import SearchText from './searchText';
+import listData from './listData';
+import ApiInfo from './apiInfo';
+import RNFS from 'react-native-fs';
+var TimerMixin = require('react-timer-mixin');
 
+const DocumentDirectoryPath = RNFS.DocumentDirectoryPath;
 
 class ResultPage extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            searchIndexList: []
+        }
     }
 
+    updateState(res) {
+        this.setState({searchIndexList: res})
+    }
     render() {
-        var dataSource = this.getDataSource(this.props.searchText);
+        var {navigator,route, state, actions} = this.props;
+        var dataSource = listData.getDataSource(route, this.state.searchIndexList);
+        this.navigator = navigator;
+        this.docPath = 'docset/jQuery/Contents/Resources/';
         var listContainerStyles = {};
         if (dataSource.getRowCount() > 0) {
             listContainerStyles.opacity = 1;
@@ -19,11 +36,14 @@ class ResultPage extends Component {
         }
         return (
             <View style={styles.container}>
-                <SearchText {...this.props} style={styles.searchText} autoFocus={true}/>
+                <SearchText {...this.props} updateState={this.updateState.bind(this)} style={styles.searchText}
+                                            autoFocus={true}/>
                 <View style={[styles.listContainer,listContainerStyles]}>
                     <CommonList
                         {...this.props}
                         dataSource={dataSource}
+                        hideSection={true}
+                        pressRow={this.pressRow.bind(this)}
                     />
                 </View>
             </View>
@@ -47,6 +67,22 @@ class ResultPage extends Component {
 
 
         return dataSource.cloneWithRowsAndSections(...this._genRows(searchText));
+    }
+
+    pressRow(rowData, rowId) {
+        var NavComponent = ApiInfo;
+        var leftTitle = '<...';
+        var apiPath = DocumentDirectoryPath + '/' + this.docPath + 'Documents/' + this.state.searchIndexList[rowId].path;
+        this.navigator.push({
+            name: rowData,
+            title: rowData,
+            leftTitle: leftTitle,
+            component: NavComponent,
+            params: {
+                apiPath: apiPath
+            },
+            configureScene: Navigator.SceneConfigs.FloatFromRight
+        })
     }
 
     _genRows(searchText) {
@@ -79,18 +115,19 @@ var styles = StyleSheet.create({
         top: 0,
         left: 0,
         width: Dimensions.get('window').width,
-        height: Dimensions.get('window').height,
-
+        height: Dimensions.get('window').height + 65,
     },
     listContainer: {
         flex: 1,
         backgroundColor: '#000',
+        overflow: 'hidden',
         opacity: 0.2,
-        height: Dimensions.get('window').height,
     },
     searchText: {
-        paddingTop: 30,
+        paddingTop: 95,
     },
 });
 
 export default ResultPage;
+
+

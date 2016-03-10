@@ -7,14 +7,27 @@ import React, {
     TouchableOpacity
 } from 'react-native';
 import * as types from '../actions/actionTypes';
+import queryDB from './queryDB';
+var TimerMixin = require('react-timer-mixin');
 
-export default class SearchText extends Component {
-    constructor(props) {
-        super(props);
-    }
+var SearchText = React.createClass({
+    mixins: [TimerMixin],
+    getInitialState: function () {
+        this.state = {searchText: ''};
+        return {searchText: ''}
+    },
+    componentDidMount: function () {
 
-    render() {
-        var {dispatchSearchTextChange,dispatchHideResultPage, searchText, editable,autoFocus} = this.props;
+    },
+    searchIndexChange: function (text) {
+        var _this = this;
+        queryDB.getSearchIndex(this.props, text).then(function (res) {
+            _this.props.updateState(res);
+        });
+        this.setState({searchText: text});
+    },
+    render: function () {
+        var {dispatchHideResultPage, searchText, editable,autoFocus} = this.props;
         var editable = editable === false ? false : true;
         return (
             <View style={[styles.searchRow,this.props.style]}>
@@ -22,10 +35,10 @@ export default class SearchText extends Component {
                     autoCapitalize="none"
                     autoCorrect={false}
                     clearButtonMode="always"
-                    onChangeText={dispatchSearchTextChange}
+                    onChangeText={this.searchIndexChange}
                     placeholder="Search..."
                     style={styles.searchTextInput}
-                    value={searchText}
+                    value={this.state.searchText}
                     editable={editable}
                     autoFocus={autoFocus || false}
                 />
@@ -35,43 +48,9 @@ export default class SearchText extends Component {
             </View>
         );
     }
-}
+});
 
 var styles = StyleSheet.create({
-    listContainer: {
-        flex: 1,
-    },
-    list: {
-        backgroundColor: '#eeeeee',
-    },
-    sectionHeader: {
-        padding: 5,
-        fontWeight: '500',
-        fontSize: 11,
-    },
-    group: {
-        backgroundColor: 'white',
-    },
-    row: {
-        backgroundColor: 'white',
-        justifyContent: 'center',
-        paddingHorizontal: 15,
-        paddingVertical: 8,
-    },
-    separator: {
-        height: StyleSheet.hairlineWidth,
-        backgroundColor: '#bbbbbb',
-        marginLeft: 15,
-    },
-    rowTitleText: {
-        fontSize: 17,
-        fontWeight: '500',
-    },
-    rowDetailText: {
-        fontSize: 15,
-        color: '#888888',
-        lineHeight: 20,
-    },
     searchRow: {
         flexDirection: 'row',
         backgroundColor: '#eeeeee',
@@ -97,3 +76,5 @@ var styles = StyleSheet.create({
         paddingLeft: 10,
     }
 });
+
+export default SearchText;

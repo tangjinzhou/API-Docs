@@ -22,6 +22,7 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
+		B91B4A2E1C7F3FA000B030C5 /* www in Resources */ = {isa = PBXBuildFile; fileRef = B91B4A2D1C7F3FA000B030C5 /* www */; };
 		B9FF6C3B1C7B5C9D00F7373F /* libRNFS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B9FF6C3A1C7B5C0500F7373F /* libRNFS.a */; };
 		B9FF6C671C7C680400F7373F /* libSQLite.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B9FF6C661C7C67BB00F7373F /* libSQLite.a */; };
 		B9FF6C691C7C683F00F7373F /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B9FF6C681C7C683F00F7373F /* libsqlite3.0.tbd */; };
@@ -143,6 +144,7 @@
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
+		B91B4A2D1C7F3FA000B030C5 /* www */ = {isa = PBXFileReference; lastKnownFileType = folder; name = www; path = ../app/www; sourceTree = "<group>"; };
 		B9FF6C2B1C7B5C0400F7373F /* RNFS.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNFS.xcodeproj; path = "../node_modules/react-native-fs/RNFS.xcodeproj"; sourceTree = "<group>"; };
 		B9FF6C611C7C67BB00F7373F /* SQLite.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SQLite.xcodeproj; path = "../node_modules/react-native-sqlite-storage/src/ios/SQLite.xcodeproj"; sourceTree = "<group>"; };
 		B9FF6C681C7C683F00F7373F /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
@@ -255,6 +257,7 @@
 		13B07FAE1A68108700A75B9A /* apiAPP */ = {
 			isa = PBXGroup;
 			children = (
+				B91B4A2D1C7F3FA000B030C5 /* www */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -577,6 +580,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B91B4A2E1C7F3FA000B030C5 /* www in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 			);

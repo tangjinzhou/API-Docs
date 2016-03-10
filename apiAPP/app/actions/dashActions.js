@@ -26,3 +26,24 @@ export function dispatchHideResultPage() {
     }
 }
 
+export function dispatchSearchIndexUpdate(value) {
+    console.log(value);
+    return {
+        type: types.SEARCHINDEXUPDATE,
+        value: value
+    }
+}
+
+export function dispatchMydocsUpdate(value) {
+    return {
+        type: types.MYDOCSUPDATE,
+        value: value
+    }
+}
+
+export function dispatchOneDocApiUpdate(value) {
+    return {
+        type: types.ONEDOCAPIUPDATE,
+        value: value
+    }
+}

@@ -17,16 +17,11 @@ class DashApp extends Component {
         const { state, actions } = this.props;
 
         return (
-            <View style={{flex:1}}>
                 <Dash
                     {...state}
                     {...actions}
                 />
-                {state.showResultPage && <ResultPage
-                    {...state}
-                    {...actions}
-                />}
-            </View>
+
         );
     }
 }

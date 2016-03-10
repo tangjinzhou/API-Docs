@@ -15,14 +15,15 @@ class ApiInfo extends Component {
     }
 
     render() {
-        var {navigator} = this.props;
-        var url = 'http://www.sogou.com';
+        var {navigator, route} = this.props;
+        var apiPath = route.params.apiPath;
+        console.log(apiPath)
         return (
             <View style={styles.container}>
                 <WebView
                     ref='webview'
                     automaticallyAdjustContentInsets={false}
-                    url={url}
+                    url={apiPath}
                     javaScriptEnabled={true}
                     startInLoadingState={true}
                     style={styles.webView}

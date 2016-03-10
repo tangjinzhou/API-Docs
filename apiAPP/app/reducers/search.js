@@ -3,7 +3,9 @@ import * as types from '../actions/actionTypes';
 const initialState = {
     searchText: '',
     searchType: 'API',
-    showResultPage: false
+    showResultPage: false,
+    myDocsNameList: [],
+    oneDocApiList: [],
 };
 
 export default function search(state = initialState, action = {}) {
@@ -23,13 +25,25 @@ export default function search(state = initialState, action = {}) {
             return {
                 ...state,
                 showResultPage: true,
-                searchText: ''
+                searchText: '',
+                searchIndex: []
             }
         case types.HIDERESULTPAGE:
             return {
                 ...state,
                 showResultPage: false,
-                searchText: ''
+                searchText: '',
+                searchIndex: []
+            }
+        case types.MYDOCSUPDATE:
+            return {
+                ...state,
+                myDocsNameList: action.value
+            }
+        case types.ONEDOCAPIUPDATE:
+            return {
+                ...state,
+                oneDocApiList: action.value
             }
         default:
             return state;

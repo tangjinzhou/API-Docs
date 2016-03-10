@@ -12,37 +12,37 @@ import React, {
 
 import CommonList from './commonList';
 import SearchText from './searchText';
-import SearchAPiPage from './searchApiPage';
 import ApiInfo from './apiInfo';
+import OneDoc from './oneDoc';
 import listData from './listData';
+import queryDB from './queryDB';
+var TimerMixin = require('react-timer-mixin');
 
 class MyDocs extends Component {
     constructor(props) {
         super(props);
+        //this.mixins = [TimerMixin];
+        this.state = {
+            myDocsNameList: []
+        }
+    }
+
+    componentDidMount() {
+        var _this = this;
+        queryDB.getMyDocsNameList(this.props).then(function (res) {
+            _this.setState({myDocsNameList: res});
+        });
     }
 
     render() {
         var {navigator, showResultPage,route} = this.props;
-        var dataSource = listData.getDataSource(route);
-        this.level = route.params.level;
+        this.myDocsNameList = this.state.myDocsNameList;
+        var dataSource = listData.getDataSource(route, this.myDocsNameList);
         this.navigator = navigator;
         this.title = route.title;
-        console.log(this.level);
+
         return (
             <View style={styles.container}>
-                <TouchableOpacity
-                    onPress={()=>this.showSearchApiPage(navigator)}
-                >
-                    <View>
-                        {showResultPage && <SearchText
-                            editable={false}
-                            style={styles.searchText}
-                        />}
-                        {!showResultPage && <SearchText
-                            editable={false}
-                        />}
-                    </View>
-                </TouchableOpacity>
                 <CommonList
                     {...this.props}
                     dataSource={dataSource}
@@ -54,19 +54,16 @@ class MyDocs extends Component {
     }
 
     pressRow(rowData, rowId) {
-        var NavComponent = MyDocs;
+        var NavComponent = OneDoc;
         var leftTitle = this.title;
-        if (this.level == 2) {
-            NavComponent = ApiInfo;
-            leftTitle = '<...'
-        }
+        var docPath = this.myDocsNameList[rowId].docPath;
         this.navigator.push({
             name: rowData,
             title: rowData,
             leftTitle: leftTitle,
             component: NavComponent,
             params: {
-                level: ++this.level
+                docPath: docPath
             },
             configureScene: Navigator.SceneConfigs.FloatFromRight
         })

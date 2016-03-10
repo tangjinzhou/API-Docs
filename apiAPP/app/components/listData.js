@@ -1,52 +1,23 @@
 'use strict';
 import React, {ListView} from 'react-native';
-import RNFS from 'react-native-fs';
-import SQLite from 'react-native-sqlite-storage';
 
 class ListData {
-    getDataSource(route) {
+    getDataSource(route, searchIndexRes = []) {
         var dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-        return dataSource.cloneWithRows(this._genRows('1'));
+
+        return dataSource.cloneWithRows(this._genRows(searchIndexRes));
     }
 
-    _genRows(title) {
-        console.log(RNFS);
-
-        var errorCB = err => {
-            console.log("SQL Error: " + err);
-        };
-
-        var successCB = () => {
-            console.log("SQL executed fine");
-        };
-
-        var openCB = ()=> {
-            console.log("Database OPENED");
-        };
-        console.log(SQLite);
-        var db = SQLite.openDatabase("docSet.dsidx", openCB, errorCB);
-        db.transaction((tx) => {
-            tx.executeSql('SELECT * FROM searchIndex', [], (tx, results) => {
-                console.log("Query completed");
-
-                var len = results.rows.length;
-                for (let i = 0; i < len; i++) {
-                    let row = results.rows.item(i);
-                    console.log(`Employee name: ${row.name}, Dept Name: ${row.deptName}`);
-                }
-            });
-        });
-
-
+    _genRows(searchIndexRes) {
         var dataBlob = [];
-        for (var ii = 0; ii < 10; ii++) {
-            var pressedText = title + ii;
-            dataBlob.push(pressedText);
+        for (var ii = 0, len = searchIndexRes.length; ii < len; ii++) {
+            var pressedText = ii;
+            dataBlob.push(searchIndexRes[ii].name);
         }
         return dataBlob;
     }
 
-    getDataSourceWithSection(searchText) {
+    getDataSourceWithSection(searchText, searchIndexRes) {
         var getSectionData = (dataBlob, sectionID) => {
             return dataBlob[sectionID];
         };
@@ -60,10 +31,10 @@ class ListData {
             rowHasChanged: (row1, row2) => row1 !== row2,
             sectionHeaderHasChanged: (s1, s2) => s1 !== s2,
         });
-        return dataSource.cloneWithRowsAndSections(...this._genRowsWithSection(searchText));
+        return dataSource.cloneWithRowsAndSections(...this._genRowsWithSection(searchText, searchIndexRes));
     }
 
-    _genRowsWithSection(searchText) {
+    _genRowsWithSection(searchText, searchIndexRes) {
         var dataBlob = {};
         var sectionIDs = [];
         var rowIDs = [];

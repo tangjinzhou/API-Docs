@@ -6,7 +6,8 @@ import React, {
     View,
     Text,
     PixelRatio,
-    TouchableOpacity
+    TouchableOpacity,
+    Dimensions
 } from 'react-native';
 
 import SettingsPage from './settingsPage';
@@ -19,7 +20,10 @@ export default class Dash extends Component {
     }
 
     render() {
+        const { showResultPage, actions } = this.props;
+        var containerStyles = showResultPage ? [styles.container, styles.showResultPage] : styles.container;
         return (
+            <View style={containerStyles}>
             <Navigator
                 style={styles.navContainer}
                 initialRoute={{
@@ -50,6 +54,8 @@ export default class Dash extends Component {
                     />
                 }
             />
+
+            </View>
         );
     }
 }
@@ -112,8 +118,18 @@ var NavigationBarRouteMapper = {
 
 };
 var styles = StyleSheet.create({
+    container: {
+        //flex: 1
+        height: Dimensions.get('window').height,
+    },
+
     navContainer: {
-        flex: 1,
+        //flex: 1,
+    },
+    showResultPage: {
+        position: 'relative',
+        top: -65,
+        height: Dimensions.get('window').height + 65,
     },
     button: {
         backgroundColor: 'white',
