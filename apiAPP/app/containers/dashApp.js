@@ -2,7 +2,7 @@
 
 import React, { Component,View } from 'react-native';
 import {bindActionCreators} from 'redux';
-import Dash from '../components/dashRouter';
+import Dash from '../components/dash';
 import ResultPage from '../components/resultPage';
 import * as dashActions from '../actions/dashActions';
 import { connect } from 'react-redux';

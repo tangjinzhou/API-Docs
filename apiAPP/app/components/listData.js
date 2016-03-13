@@ -10,7 +10,8 @@ class ListData {
 
     _genRows(searchIndexRes) {
         var dataBlob = [];
-        for (var ii = 0, len = searchIndexRes.length; ii < len; ii++) {
+        var len = searchIndexRes.length > 100 ? 15 : searchIndexRes.length;
+        for (var ii = 0; ii < len; ii++) {
             var pressedText = ii;
             dataBlob.push(searchIndexRes[ii].name);
         }

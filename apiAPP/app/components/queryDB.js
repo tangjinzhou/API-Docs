@@ -14,6 +14,7 @@ var openCB = ()=> {
     console.log("Database OPENED");
 };
 var db = SQLite.openDatabase("docset/jQuery/Contents/Resources/docSet.dsidx", openCB, errorCB);
+//var db = SQLite.openDatabase({name:"docSet.dsidx",createFromLocation: 1}, openCB, errorCB);
 class QueryDB {
 
     getSearchIndex(props, searchText) {
@@ -39,10 +40,11 @@ class QueryDB {
         }
     }
 
-    getOneDocApiList(props) {
-        console.log(props);
-        var docPath = props.docPath;
+    getOneDocApiList(docPath) {
+        //console.log(props);
+        //var docPath = props.route.passProps.docPath;
         var db = SQLite.openDatabase(docPath + 'docSet.dsidx', openCB, errorCB);
+        //var db = SQLite.openDatabase({name:"docSet.dsidx",createFromLocation: 1}, openCB, errorCB);
         return new Promise(function (reslove, reject) {
             db.transaction((tx) => {
                 tx.executeSql('SELECT * FROM searchIndex', [], (tx, results) => {

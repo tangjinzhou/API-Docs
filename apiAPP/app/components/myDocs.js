@@ -57,13 +57,18 @@ class MyDocs extends Component {
         var NavComponent = OneDoc;
         var leftTitle = this.title;
         var docPath = this.myDocsNameList[rowId].docPath;
-        var props = Object.assign({}, this.props, {docPath: docPath});
-        this.props.route.push({
-            navbarComponent: NavbarWrapper,
-            navbarPassProps: {leftTitle: 'Docsets', title: rowData},
-            component: NavComponent,
-            passProps: {docPath: docPath}
-        })
+
+        var _this = this;
+        queryDB.getOneDocApiList(docPath).then(function (res) {
+            //_this.setState(Object.assign(_this.state, {oneDocApiList: res}));
+            _this.navigator.push({
+                title: rowData,
+                leftTitle: 'Docsets',
+                component: NavComponent,
+                navbarPassProps: {leftTitle: 'Docsets', title: rowData},
+                passProps: {docPath: docPath, oneDocApiList: res}
+            })
+        });
 
     }
 }

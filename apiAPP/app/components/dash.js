@@ -161,8 +161,6 @@ var styles = StyleSheet.create({
     },
     navBarTitleText: {
         fontWeight: '500',
-        marginVertical: 9,
-        width: 200,
         overflow: "hidden",
         textAlign: "center",
         fontFamily: 'helvetica neue'

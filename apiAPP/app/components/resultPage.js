@@ -26,9 +26,10 @@ class ResultPage extends Component {
         this.setState({searchIndexList: res})
     }
     render() {
-        var {route, state, actions, actionPage} = this.props;
+        var {route, state, actions, actionPage, navigator} = this.props;
         var dataSource = listData.getDataSource(route, this.state.searchIndexList);
         this.docPath = 'docset/jQuery/Contents/Resources/';
+        this.navigator = navigator;
         var listContainerStyles = {};
         if (dataSource.getRowCount() > 0) {
             listContainerStyles.opacity = 1;
@@ -73,9 +74,9 @@ class ResultPage extends Component {
         var leftTitle = '<...';
         var apiPath = DocumentDirectoryPath + '/' + this.docPath + 'Documents/' + this.state.searchIndexList[rowId].path;
 
-        this.props.route.push({
-            navbarComponent: NavbarWrapper,
-            navbarPassProps: {leftTitle: leftTitle, title: rowData},
+        this.navigator.push({
+            title: rowData,
+            leftTitle: leftTitle,
             component: NavComponent,
             passProps: {apiPath: apiPath}
         })

@@ -35,16 +35,17 @@ var OneDoc = React.createClass({
     componentDidMount: function () {
         var _this = this;
         this.props.actions.dispatchHideResultPage('oneDoc');
-        queryDB.getOneDocApiList(this.props).then(function (res) {
-            _this.setState(Object.assign(_this.state, {oneDocApiList: res}));
-        });
+        //queryDB.getOneDocApiList(this.props).then(function (res) {
+        //    _this.setState(Object.assign(_this.state, {oneDocApiList: res}));
+        //});
     },
 
     render: function () {
-        var {state,actions, route, docPath} = this.props;
-        this.oneDocApiList = this.state.oneDocApiList;
+        var {state,actions, navigator, route} = this.props;
+        this.oneDocApiList = route.passProps.oneDocApiList;
         var dataSource = listData.getDataSource(route, this.oneDocApiList);
-        this.docPath = docPath;
+        this.docPath = route.passProps.docPath;
+        this.navigator = navigator;
         var showResultPage = state.showResultPage;
         return (
             <View style={styles.container}>
@@ -77,17 +78,15 @@ var OneDoc = React.createClass({
         var apiPath = DocumentDirectoryPath + '/' + this.docPath + 'Documents/' + this.oneDocApiList[rowId].path;
 
         var props = Object.assign({}, this.props, {apiPath: apiPath});
-        this.props.route.push({
-            navbarComponent: NavbarWrapper,
-            navbarPassProps: {leftTitle: leftTitle, title: rowData},
+
+
+        this.navigator.push({
+            title: rowData,
+            leftTitle: leftTitle,
             component: NavComponent,
             passProps: props
         })
 
-    },
-
-    showSearchApiPage: function () {
-        this.setState(Object.assign(this.state, {showResultPage: true}));
     }
 
 })
