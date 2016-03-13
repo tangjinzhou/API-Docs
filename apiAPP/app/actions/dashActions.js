@@ -14,14 +14,16 @@ export function dispatchSearchTypeChange(value) {
   }
 }
 
-export function dispatchShowResultPage() {
+export function dispatchShowResultPage(page) {
     return {
+        page: page,
         type: types.SHOWRESULTPAGE
     }
 }
 
-export function dispatchHideResultPage() {
+export function dispatchHideResultPage(page) {
     return {
+        page: page,
         type: types.HIDERESULTPAGE
     }
 }

@@ -41,7 +41,7 @@ class QueryDB {
 
     getOneDocApiList(props) {
         console.log(props);
-        var docPath = props.route.params.docPath;
+        var docPath = props.docPath;
         var db = SQLite.openDatabase(docPath + 'docSet.dsidx', openCB, errorCB);
         return new Promise(function (reslove, reject) {
             db.transaction((tx) => {

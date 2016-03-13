@@ -26,6 +26,9 @@ var CommonList = React.createClass({
             dataSource: ds.cloneWithRows([]),
         };
     },
+    shouldComponentUpdate: function (nextProps, nextState) {
+        return this.props.dataSource != nextProps.dataSource;
+    },
     render: function () {
         //this._genRows(this.props.searchText);
         var dataSource = this.props.dataSource || this.state.dataSource;
@@ -60,6 +63,7 @@ var CommonList = React.createClass({
     },
 
     _pressRow: function (rowData, rowID) {
+        console.log(rowData);
         if (typeof this.pressRow == 'function') {
             this.pressRow(rowData, rowID);
         }
@@ -68,8 +72,7 @@ var CommonList = React.createClass({
         var imgSource = require('../Resources/jQuery.png');
 
         return (
-            <TouchableHighlight onPress={()=>this._pressRow(rowData,rowID)}>
-                <View>
+            <TouchableOpacity onPress={() => this._pressRow(rowData,rowID)}>
                     <View style={styles.row}>
                         <Image style={styles.thumb} source={imgSource}/>
                         <Text style={styles.text}>
@@ -79,8 +82,7 @@ var CommonList = React.createClass({
                             >
                         </Text>
                     </View>
-                </View>
-            </TouchableHighlight>
+            </TouchableOpacity>
         );
     }
 

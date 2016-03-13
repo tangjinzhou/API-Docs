@@ -15,8 +15,7 @@ class ApiInfo extends Component {
     }
 
     render() {
-        var {navigator, route} = this.props;
-        var apiPath = route.params.apiPath;
+        var {navigator, route, apiPath} = this.props;
         console.log(apiPath)
         return (
             <View style={styles.container}>

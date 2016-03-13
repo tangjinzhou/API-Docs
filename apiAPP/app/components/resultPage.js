@@ -10,6 +10,7 @@ import listData from './listData';
 import ApiInfo from './apiInfo';
 import RNFS from 'react-native-fs';
 var TimerMixin = require('react-timer-mixin');
+var NavbarWrapper = require('./navbar');
 
 const DocumentDirectoryPath = RNFS.DocumentDirectoryPath;
 
@@ -25,9 +26,8 @@ class ResultPage extends Component {
         this.setState({searchIndexList: res})
     }
     render() {
-        var {navigator,route, state, actions} = this.props;
+        var {route, state, actions, actionPage} = this.props;
         var dataSource = listData.getDataSource(route, this.state.searchIndexList);
-        this.navigator = navigator;
         this.docPath = 'docset/jQuery/Contents/Resources/';
         var listContainerStyles = {};
         if (dataSource.getRowCount() > 0) {
@@ -37,7 +37,7 @@ class ResultPage extends Component {
         return (
             <View style={styles.container}>
                 <SearchText {...this.props} updateState={this.updateState.bind(this)} style={styles.searchText}
-                                            autoFocus={true}/>
+                                            autoFocus={true} actionPage={actionPage}/>
                 <View style={[styles.listContainer,listContainerStyles]}>
                     <CommonList
                         {...this.props}
@@ -65,7 +65,6 @@ class ResultPage extends Component {
             sectionHeaderHasChanged: (s1, s2) => s1 !== s2,
         });
 
-
         return dataSource.cloneWithRowsAndSections(...this._genRows(searchText));
     }
 
@@ -73,15 +72,12 @@ class ResultPage extends Component {
         var NavComponent = ApiInfo;
         var leftTitle = '<...';
         var apiPath = DocumentDirectoryPath + '/' + this.docPath + 'Documents/' + this.state.searchIndexList[rowId].path;
-        this.navigator.push({
-            name: rowData,
-            title: rowData,
-            leftTitle: leftTitle,
+
+        this.props.route.push({
+            navbarComponent: NavbarWrapper,
+            navbarPassProps: {leftTitle: leftTitle, title: rowData},
             component: NavComponent,
-            params: {
-                apiPath: apiPath
-            },
-            configureScene: Navigator.SceneConfigs.FloatFromRight
+            passProps: {apiPath: apiPath}
         })
     }
 
@@ -111,11 +107,7 @@ class ResultPage extends Component {
 
 var styles = StyleSheet.create({
     container: {
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        width: Dimensions.get('window').width,
-        height: Dimensions.get('window').height + 65,
+        height: Dimensions.get('window').height,
     },
     listContainer: {
         flex: 1,
@@ -124,7 +116,7 @@ var styles = StyleSheet.create({
         opacity: 0.2,
     },
     searchText: {
-        paddingTop: 95,
+        //paddingTop: 95,
     },
 });
 

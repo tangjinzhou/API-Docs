@@ -27,7 +27,7 @@ var SearchText = React.createClass({
         this.setState({searchText: text});
     },
     render: function () {
-        var {dispatchHideResultPage, searchText, editable,autoFocus} = this.props;
+        var {actions, editable,autoFocus} = this.props;
         var editable = editable === false ? false : true;
         return (
             <View style={[styles.searchRow,this.props.style]}>
@@ -42,7 +42,7 @@ var SearchText = React.createClass({
                     editable={editable}
                     autoFocus={autoFocus || false}
                 />
-                {editable && <TouchableOpacity onPress={dispatchHideResultPage}>
+                {editable && <TouchableOpacity onPress={()=>actions.dispatchHideResultPage(this.props.actionPage)}>
                     <Text style={styles.cancelBtn}>取消</Text>
                 </TouchableOpacity>}
             </View>

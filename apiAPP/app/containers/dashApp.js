@@ -2,7 +2,7 @@
 
 import React, { Component,View } from 'react-native';
 import {bindActionCreators} from 'redux';
-import Dash from '../components/dash';
+import Dash from '../components/dashRouter';
 import ResultPage from '../components/resultPage';
 import * as dashActions from '../actions/dashActions';
 import { connect } from 'react-redux';
@@ -14,12 +14,9 @@ class DashApp extends Component {
     }
 
     render() {
-        const { state, actions } = this.props;
 
         return (
                 <Dash
-                    {...state}
-                    {...actions}
                 />
 
         );
@@ -28,12 +25,12 @@ class DashApp extends Component {
 
 export default DashApp;
 
-function getState(state) {
-    state = Object.assign({}, state.search);
-    return {state: state}
-}
-export default connect(getState,
-    (dispatch) => ({
-        actions: bindActionCreators(dashActions, dispatch)
-    })
-)(DashApp);
+//function getState(state) {
+//    state = Object.assign({}, state.search);
+//    return {state: state}
+//}
+//export default connect(getState,
+//    (dispatch) => ({
+//        actions: bindActionCreators(dashActions, dispatch)
+//    })
+//)(DashApp);

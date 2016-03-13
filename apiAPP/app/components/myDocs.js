@@ -17,11 +17,11 @@ import OneDoc from './oneDoc';
 import listData from './listData';
 import queryDB from './queryDB';
 var TimerMixin = require('react-timer-mixin');
+var NavbarWrapper = require('./navbar');
 
 class MyDocs extends Component {
     constructor(props) {
         super(props);
-        //this.mixins = [TimerMixin];
         this.state = {
             myDocsNameList: []
         }
@@ -57,23 +57,15 @@ class MyDocs extends Component {
         var NavComponent = OneDoc;
         var leftTitle = this.title;
         var docPath = this.myDocsNameList[rowId].docPath;
-        this.navigator.push({
-            name: rowData,
-            title: rowData,
-            leftTitle: leftTitle,
+        var props = Object.assign({}, this.props, {docPath: docPath});
+        this.props.route.push({
+            navbarComponent: NavbarWrapper,
+            navbarPassProps: {leftTitle: 'Docsets', title: rowData},
             component: NavComponent,
-            params: {
-                docPath: docPath
-            },
-            configureScene: Navigator.SceneConfigs.FloatFromRight
+            passProps: {docPath: docPath}
         })
 
     }
-
-    showSearchApiPage(navigator) {
-        this.props.dispatchShowResultPage();
-    }
-
 }
 
 var styles = StyleSheet.create({

@@ -47,12 +47,11 @@ export default class Dash extends Component {
                     }
                     return Navigator.SceneConfigs.FloatFromRight
                 }}
-                navigationBar={
-                    <Navigator.NavigationBar
+                navigationBar={<Navigator.NavigationBar
                         routeMapper={NavigationBarRouteMapper}
                         style={styles.navBar}
                     />
-                }
+                 }
             />
 
             </View>
@@ -72,7 +71,7 @@ var NavigationBarRouteMapper = {
                     component: SettingsPage,
                     configureScene: Navigator.SceneConfigs.FloatFromBottom
                 })}
-                    style={styles.navBarLeftButton}>
+                    style={styles.navBarButton}>
                     <Text style={[styles.navBarText, styles.navBarButtonText]}>
                         {"Setting"}
                     </Text>
@@ -85,7 +84,7 @@ var NavigationBarRouteMapper = {
         return (
             <TouchableOpacity
                 onPress={() => navigator.pop()}
-                style={styles.navBarLeftButton}>
+                style={styles.navBarButton}>
                 <Text style={[styles.navBarText, styles.navBarButtonText]}>
                     {title}
                 </Text>
@@ -98,7 +97,7 @@ var NavigationBarRouteMapper = {
             return (
                 <TouchableOpacity
                     onPress={() => navigator.pop()}
-                    style={styles.navBarLeftButton}>
+                    style={styles.navBarButton}>
                     <Text style={[styles.navBarText, styles.navBarButtonText, styles.navBarRightButton]}>
                         {"Edit"}
                     </Text>
@@ -110,7 +109,7 @@ var NavigationBarRouteMapper = {
 
     Title: function (route, navigator, index, navState) {
         return (
-            <Text style={[styles.navBarText, styles.navBarTitleText, styles.navBarTitleText ]}>
+            <Text style={[styles.navBarText, styles.navBarTitleText]}>
                 {route.title}
             </Text>
         );
@@ -127,9 +126,9 @@ var styles = StyleSheet.create({
         //flex: 1,
     },
     showResultPage: {
-        position: 'relative',
-        top: -65,
-        height: Dimensions.get('window').height + 65,
+        //position: 'relative',
+        //top: -65,
+        //height: Dimensions.get('window').height + 65,
     },
     button: {
         backgroundColor: 'white',
@@ -143,6 +142,7 @@ var styles = StyleSheet.create({
         fontWeight: '400',
     },
     navBar: {
+        //height: 0,
         backgroundColor: 'white',
         borderBottomWidth: 1.5 / PixelRatio.get(),
         borderBottomColor: '#CDCDCD',
@@ -150,8 +150,10 @@ var styles = StyleSheet.create({
     navBarText: {
         fontSize: 16,
         marginVertical: 10,
+        //height: 0,
     },
-    navBarLeftButton: {
+    navBarButton: {
+        //height: 0,
         paddingLeft: 10,
     },
     navBarRightButton: {
@@ -161,7 +163,6 @@ var styles = StyleSheet.create({
         fontWeight: '500',
         marginVertical: 9,
         width: 200,
-        height: 20,
         overflow: "hidden",
         textAlign: "center",
         fontFamily: 'helvetica neue'
@@ -171,6 +172,10 @@ var styles = StyleSheet.create({
         paddingTop: 20,
         backgroundColor: '#EAEAEA',
     },
+    sceneStyle: {
+        //position:'relative',
+        //top: -100,
+    }
 });
 
 

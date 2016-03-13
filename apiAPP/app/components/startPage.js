@@ -6,6 +6,10 @@ import React, {
     TouchableOpacity
 } from 'react-native';
 
+import {bindActionCreators} from 'redux';
+import * as dashActions from '../actions/dashActions';
+import { connect } from 'react-redux';
+
 import MyDocs from './myDocs';
 import ResultPage from '../components/resultPage';
 import SearchText from './searchText';
@@ -14,34 +18,37 @@ import queryDB from './queryDB';
 export default class StartPage extends Component {
     constructor(props) {
         super(props);
-        queryDB.getMyDocsNameList(this.props);
     }
 
+    shouldComponentUpdate(nextProps, nextState) {
+        return this.props.state.showResultPage !== nextProps.state.showResultPage;
+    }
     render() {
-        //const {state, actions} = this.props;
-        const { showResultPage,navigator} = this.props;
+        const { state, actions} = this.props;
+        var showResultPage = state.showResultPage;
         return (
             <View style={styles.container}>
-                <TouchableOpacity
-                    onPress={()=>this.showSearchApiPage(navigator)}
+                {!showResultPage && <TouchableOpacity
+                    onPress={()=>this.showSearchApiPage()}
                 >
                     <View>
-                        {!showResultPage && <SearchText
+                        <SearchText
                             editable={false}
-                        />}
+                        />
                     </View>
-                </TouchableOpacity>
+                </TouchableOpacity>}
                 <MyDocs {...this.props}
                 />
                 {showResultPage && <ResultPage
                     {...this.props}
+                    actionPage={'startPage'}
                 />}
             </View>
         );
     }
 
-    showSearchApiPage(navigator) {
-        this.props.dispatchShowResultPage();
+    showSearchApiPage() {
+        this.props.actions.dispatchShowResultPage('startPage');
     }
 }
 
@@ -54,3 +61,13 @@ var styles = StyleSheet.create({
         height: 30,
     }
 });
+
+function getState(state) {
+    state = Object.assign({}, state.search);
+    return {state: state}
+}
+export default connect(getState,
+    (dispatch) => ({
+        actions: bindActionCreators(dashActions, dispatch)
+    })
+)(StartPage);

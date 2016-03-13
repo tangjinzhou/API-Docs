@@ -2,12 +2,23 @@ import * as types from '../actions/actionTypes';
 
 const initialState = {
     showResultPage: false,
-    testA: 2,
+    testA: 1,
 };
 
-export default function search(state = initialState, action = {}) {
-    if (action.page === 'startPage') {
+export default function oneDoc(state = initialState, action = {}) {
+    if (action.page === 'oneDoc') {
         switch (action.type) {
+            case types.SEARCHTEXTCHANGE:
+                return {
+                    ...state,
+                    searchText: action.value
+                }
+            case types.SEARCHTYPECHANGE:
+                return {
+                    ...state,
+                    searchText: action.searchType === state.searchType ? state.searchText : '',
+                    searchType: action.value
+                }
             case types.SHOWRESULTPAGE:
                 return {
                     ...state,
