@@ -22,7 +22,6 @@ import queryDB from './queryDB';
 import RNFS from 'react-native-fs';
 import ResultPage from '../components/resultPage';
 var TimerMixin = require('react-timer-mixin');
-var NavbarWrapper = require('./navbar');
 
 const DocumentDirectoryPath = RNFS.DocumentDirectoryPath;
 

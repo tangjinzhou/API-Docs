@@ -47,7 +47,7 @@ var CommonList = React.createClass({
         };
         !hideSection && Object.assign(listViewProps, {renderSectionHeader: this.renderSectionHeader});
         return (
-            <ListView
+            <ListView style={styles.container}
                 {...listViewProps}
             />
         );

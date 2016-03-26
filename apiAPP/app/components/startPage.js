@@ -55,11 +55,8 @@ export default class StartPage extends Component {
 var styles = StyleSheet.create({
     container: {
         flex: 1,
-        position: 'relative',
+        // position: 'relative',
     },
-    searchTextInput: {
-        height: 30,
-    }
 });
 
 function getState(state) {

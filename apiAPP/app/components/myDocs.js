@@ -77,10 +77,6 @@ var styles = StyleSheet.create({
     container: {
         flex: 1,
     },
-
-    searchText: {
-        paddingTop: 30,
-    },
 });
 
 export default MyDocs;

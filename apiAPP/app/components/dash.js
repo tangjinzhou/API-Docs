@@ -12,6 +12,7 @@ import React, {
 
 import SettingsPage from './settingsPage';
 import StartPage from './startPage';
+import DownloadPage from './downloadPage';
 
 
 export default class Dash extends Component {
@@ -65,15 +66,16 @@ var NavigationBarRouteMapper = {
             return (
                 <TouchableOpacity
                     onPress={() => navigator.push({
-                    name: 'Setting',
-                    title: 'Setting',
-                    leftTitle: 'Done',
-                    component: SettingsPage,
-                    configureScene: Navigator.SceneConfigs.FloatFromBottom
-                })}
+                        name: 'Download',
+                        title: 'Download',
+                        leftTitle: 'Done',
+                        component: DownloadPage,
+                        //configureScene: Navigator.SceneConfigs.FloatFromBottom
+                        }
+                    )}
                     style={styles.navBarButton}>
                     <Text style={[styles.navBarText, styles.navBarButtonText]}>
-                        {"Setting"}
+                        {"Download"}
                     </Text>
                 </TouchableOpacity>
             );
@@ -118,13 +120,11 @@ var NavigationBarRouteMapper = {
 };
 var styles = StyleSheet.create({
     container: {
-        //flex: 1
+        flex: 1,
         height: Dimensions.get('window').height,
     },
 
-    navContainer: {
-        //flex: 1,
-    },
+    navContainer: {},
     showResultPage: {
         //position: 'relative',
         //top: -65,
@@ -165,15 +165,6 @@ var styles = StyleSheet.create({
         textAlign: "center",
         fontFamily: 'helvetica neue'
     },
-    scene: {
-        flex: 1,
-        paddingTop: 20,
-        backgroundColor: '#EAEAEA',
-    },
-    sceneStyle: {
-        //position:'relative',
-        //top: -100,
-    }
 });
 
 
