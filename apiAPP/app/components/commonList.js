@@ -35,6 +35,7 @@ var CommonList = React.createClass({
         var hideSection = this.props.hideSection || false;
         this.navigator = this.props.navigator;
         this.pressRow = this.props.pressRow;
+        //var renderRow = this.props.renderRow || this._renderRow;
         var listViewProps = {
             automaticallyAdjustContentInsets: true,
             keyboardDismissMode: 'on-drag',
@@ -69,10 +70,13 @@ var CommonList = React.createClass({
         }
     },
     _renderRow: function (rowData, sectionID, rowID) {
-        var imgSource = require('../Resources/jQuery.png');
+        if (typeof  this.props.renderRow == 'function') {
+            return this.props.renderRow(rowData, sectionID, rowID);
+        } else {
+            var imgSource = require('../Resources/jQuery.png');
 
-        return (
-            <TouchableOpacity onPress={() => this._pressRow(rowData,rowID)}>
+            return (
+                <TouchableOpacity onPress={() => this._pressRow(rowData,rowID)}>
                     <View style={styles.row}>
                         <Image style={styles.thumb} source={imgSource}/>
                         <Text style={styles.text}>
@@ -82,8 +86,9 @@ var CommonList = React.createClass({
                             >
                         </Text>
                     </View>
-            </TouchableOpacity>
-        );
+                </TouchableOpacity>
+            );
+        }
     }
 
 

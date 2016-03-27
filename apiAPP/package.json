@@ -15,6 +15,7 @@
     "react": "^0.14.7",
     "react-native": "^0.19.0",
     "react-native-custom-navigation": "^0.2.2",
+    "react-native-file-download": "0.0.6",
     "react-native-fs": "^1.2.0",
     "react-native-sqlite": "0.0.12",
     "react-native-sqlite-storage": "^2.1.3",
