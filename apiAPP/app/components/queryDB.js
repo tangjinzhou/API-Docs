@@ -13,11 +13,12 @@ var successCB = () => {
 var openCB = ()=> {
     console.log("Database OPENED");
 };
-var db = SQLite.openDatabase("docset/jQuery/Contents/Resources/docSet.dsidx", openCB, errorCB);
+//var db = SQLite.openDatabase("docset/jQuery/Contents/Resources/docSet.dsidx", openCB, errorCB);
 //var db = SQLite.openDatabase({name:"docSet.dsidx",createFromLocation: 1}, openCB, errorCB);
 class QueryDB {
 
     getSearchIndex(props, searchText) {
+        var db = SQLite.openDatabase("docset/jQuery/Contents/Resources/docSet.dsidx", openCB, errorCB);
         var {searchIndex} = props;
         if (searchText.trim() == '') {
             return new Promise(function (resolve, reject) {
@@ -60,12 +61,13 @@ class QueryDB {
         })
     }
 
-    getMyDocsNameList(props) {
+    getMyDocsNameList() {
         var db = SQLite.openDatabase("myDocs.dsidx", openCB, errorCB);
         return new Promise(function (resolve, reject) {
             db.transaction((tx) => {
-                //tx.executeSql('CREATE TABLE IF NOT EXISTS myDocs (name text primary key, docPath text)', [], function() {}, function() {});
-                //tx.executeSql('INSERT OR REPLACE INTO myDocs (name, docPath) VALUES (?,?)',['jQuery','docset/jQuery/Contents/Resources/']);
+                tx.executeSql('CREATE TABLE IF NOT EXISTS myDocs (name text primary key, docPath text)', [], function () {
+                }, function () {
+                });
                 tx.executeSql('SELECT * FROM myDocs', [], (tx, results) => {
                     var len = results.rows.length;
                     var res = [];
@@ -77,7 +79,18 @@ class QueryDB {
                 });
             });
         })
+    }
 
+    addMyDocs(name, docPath) {
+        docPath = docPath || 'docset/' + name + '/' + name + '.docset/Contents/Resources/';
+        var db = SQLite.openDatabase("myDocs.dsidx", openCB, errorCB);
+        return new Promise(function (resolve, reject) {
+            db.transaction((tx) => {
+                tx.executeSql('INSERT OR REPLACE INTO myDocs (name, docPath) VALUES (?,?)', [name, docPath], (tx, results)=> {
+                    resolve();
+                });
+            })
+        })
     }
 }
 

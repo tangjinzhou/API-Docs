@@ -9,6 +9,8 @@ import React, {
     WebView
 } from 'react-native';
 
+//import WebViewBridge from 'react-native-webview-bridge';
+
 class ApiInfo extends Component {
     constructor(props) {
         super(props);
@@ -17,12 +19,14 @@ class ApiInfo extends Component {
     render() {
         var {navigator, route} = this.props;
         var apiPath = route.passProps.apiPath;
+        console.log(apiPath);
+        //apiPath = encodeURIComponent(apiPath);
         return (
             <View style={styles.container}>
                 <WebView
                     ref='webview'
                     automaticallyAdjustContentInsets={false}
-                    url={apiPath}
+                    source={{uri:apiPath}}
                     javaScriptEnabled={true}
                     startInLoadingState={true}
                     style={styles.webView}

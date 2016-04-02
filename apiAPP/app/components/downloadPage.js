@@ -19,6 +19,7 @@ import SearchAPiPage from './searchApiPage';
 import ApiInfo from './apiInfo';
 import queryDB from './queryDB';
 import RNFS from 'react-native-fs';
+import ZipArchive from 'react-native-zip-archive';
 import ResultPage from '../components/resultPage';
 import getImageSource from '../imageSource';
 var TimerMixin = require('react-timer-mixin');
@@ -39,18 +40,25 @@ var DocSets = React.createClass({
         fetch(GET_DOCSETS_URL)
             .then((response) => response.json())
             .then((responseJson) => {
-                console.log(responseJson);
                 var data = responseJson.data;
-                for (var i = 0; i < data.length; i++) {
-                    data[i].download = 0;
-                }
-                _this.setState({docSetsList: data});
+                queryDB.getMyDocsNameList().then(function (mydocs) {
+                    console.log(mydocs);
+                    for (let i = 0; i < data.length; i++) {
+                        data[i].download = 0;
+                        for (let j = 0; j < mydocs.length; j++) {
+                            if (mydocs[j].name == data[i].name) {
+                                data[i].download = 1;
+                                break;
+                            }
+                        }
+                    }
+                    _this.setState({docSetsList: data});
+                })
+
             })
             .catch((error) => {
                 console.warn(error);
             });
-
-
     },
 
     render: function () {
@@ -86,6 +94,7 @@ var DocSets = React.createClass({
         var rowRight = <TouchableOpacity onPress={() => this.pressRow(rowData,rowID)}>
             <Image style={[styles.thumb]} source={getImageSource('download.png')}/>
         </TouchableOpacity>;
+        //2:下载中 1:已下载 0:未下载
         if (docset.download == 1) {
             rowRight = <Image style={[styles.thumb]} source={getImageSource('done.png')}/>;
         } else if (docset.download == 2) {
@@ -131,13 +140,29 @@ var DocSets = React.createClass({
         this.state.docSetsList[rowID].percent = '0%'; //2:下载中 1:已下载 0:未下载
         this.setState({docSetsList: this.state.docSetsList});
         var downloadurl = config.SERVERBASEURL + this.state.docSetsList[rowID].path;
+        var name = this.state.docSetsList[rowID].name;
         var _this = this;
         RNFS.mkdir(DocumentDirectoryPath + '/docset/').then(function (res) {
             if (res[0]) {
-                RNFS.downloadFile(downloadurl, res[1] + _this.state.docSetsList[rowID].name + '.zip', function () {
+                var file = res[1] + name + '.zip';
+                var target = res[1];
+                RNFS.downloadFile(downloadurl, file, function () {
                 }, function (res) {
-                    _this.state.docSetsList[rowID].percent = parseInt(res.bytesWritten / res.contentLength * 100, 10) + '%'; //2:下载中 1:已下载 0:未下载
+                    let percent = parseInt(res.bytesWritten / res.contentLength * 100, 10) + '%'; //2:下载中 1:已下载 0:未下载
+                    _this.state.docSetsList[rowID].percent = percent == '100%' ? '解压中' : percent;
                     _this.setState({docSetsList: _this.state.docSetsList});
+                }).then(function () {
+                    ZipArchive.unzip(file, target).then(() => {
+                            console.log('unzip completed!')
+                            queryDB.addMyDocs(name).then(function () {
+                                _this.state.docSetsList[rowID].download = 1;
+                                _this.setState({docSetsList: _this.state.docSetsList});
+                            })
+                        })
+                        .catch((error) => {
+                            console.log(error)
+                        })
+
                 })
             }
         })

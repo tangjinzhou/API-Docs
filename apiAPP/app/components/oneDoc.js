@@ -78,7 +78,6 @@ var OneDoc = React.createClass({
 
         var props = Object.assign({}, this.props, {apiPath: apiPath});
 
-
         this.navigator.push({
             title: rowData,
             leftTitle: leftTitle,
