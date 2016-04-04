@@ -7,6 +7,9 @@ var getImageSource = function (icon) {
         case 'angularjs.png':
             imageSource = require('./Resources/angularjs.png');
             break;
+        case 'AngularJs.png':
+            imageSource = require('./Resources/angularjs.png');
+            break;
         case 'download.png':
             imageSource = require('./Resources/download.png');
             break;

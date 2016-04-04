@@ -22,13 +22,12 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
-		B91B4A2E1C7F3FA000B030C5 /* www in Resources */ = {isa = PBXBuildFile; fileRef = B91B4A2D1C7F3FA000B030C5 /* www */; };
-		B93F6D6A1CAFAC7700198991 /* libRNZipArchive.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B93F6D691CAFAC4000198991 /* libRNZipArchive.a */; };
-		B93F6D6C1CAFB10200198991 /* libz.1.2.5.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B93F6D6B1CAFB10200198991 /* libz.1.2.5.tbd */; };
-		B93F6D731CB0136E00198991 /* libReact-Native-Webview-Bridge.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B93F6D721CB0135900198991 /* libReact-Native-Webview-Bridge.a */; };
-		B9FF6C3B1C7B5C9D00F7373F /* libRNFS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B9FF6C3A1C7B5C0500F7373F /* libRNFS.a */; };
-		B9FF6C671C7C680400F7373F /* libSQLite.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B9FF6C661C7C67BB00F7373F /* libSQLite.a */; };
-		B9FF6C691C7C683F00F7373F /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B9FF6C681C7C683F00F7373F /* libsqlite3.0.tbd */; };
+		B93F6DA41CB152DD00198991 /* libReact-Native-Webview-Bridge.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B93F6DA31CB152CB00198991 /* libReact-Native-Webview-Bridge.a */; };
+		B93F6DA51CB152DD00198991 /* libRNFS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B93F6D971CB1528D00198991 /* libRNFS.a */; };
+		B93F6DA61CB152DD00198991 /* libRNZipArchive.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B93F6D9D1CB152AB00198991 /* libRNZipArchive.a */; };
+		B93F6DA81CB152FA00198991 /* libz.1.2.5.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B93F6DA71CB152FA00198991 /* libz.1.2.5.tbd */; };
+		B93F6DAF1CB153CB00198991 /* libSQLite.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B93F6DAE1CB153C200198991 /* libSQLite.a */; };
+		B93F6DB11CB1545800198991 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B93F6DB01CB1545800198991 /* libsqlite3.0.tbd */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -109,30 +108,30 @@
 			remoteGlobalIDString = 58B5119B1A9E6C1200147676;
 			remoteInfo = RCTText;
 		};
-		B93F6D681CAFAC4000198991 /* PBXContainerItemProxy */ = {
+		B93F6D961CB1528D00198991 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = B93F6D641CAFAC4000198991 /* RNZipArchive.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = D058BD741B8DA4AB004D9F18;
-			remoteInfo = RNZipArchive;
-		};
-		B93F6D711CB0135900198991 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = B93F6D6D1CB0135800198991 /* React-Native-Webview-Bridge.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 4114DC4C1C187C3A003CD988;
-			remoteInfo = "React-Native-Webview-Bridge";
-		};
-		B9FF6C391C7B5C0500F7373F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = B9FF6C2B1C7B5C0400F7373F /* RNFS.xcodeproj */;
+			containerPortal = B93F6D881CB1528C00198991 /* RNFS.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = F12AFB9B1ADAF8F800E0535D;
 			remoteInfo = RNFS;
 		};
-		B9FF6C651C7C67BB00F7373F /* PBXContainerItemProxy */ = {
+		B93F6D9C1CB152AB00198991 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = B9FF6C611C7C67BB00F7373F /* SQLite.xcodeproj */;
+			containerPortal = B93F6D981CB152AB00198991 /* RNZipArchive.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D058BD741B8DA4AB004D9F18;
+			remoteInfo = RNZipArchive;
+		};
+		B93F6DA21CB152CB00198991 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B93F6D9E1CB152CB00198991 /* React-Native-Webview-Bridge.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4114DC4C1C187C3A003CD988;
+			remoteInfo = "React-Native-Webview-Bridge";
+		};
+		B93F6DAD1CB153C200198991 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B93F6DA91CB153C200198991 /* SQLite.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = E23D7B471ACEFE2A00C59171;
 			remoteInfo = SQLite;
@@ -161,13 +160,12 @@
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
-		B91B4A2D1C7F3FA000B030C5 /* www */ = {isa = PBXFileReference; lastKnownFileType = folder; name = www; path = ../app/www; sourceTree = "<group>"; };
-		B93F6D641CAFAC4000198991 /* RNZipArchive.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNZipArchive.xcodeproj; path = "../node_modules/react-native-zip-archive/RNZipArchive.xcodeproj"; sourceTree = "<group>"; };
-		B93F6D6B1CAFB10200198991 /* libz.1.2.5.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.2.5.tbd; path = usr/lib/libz.1.2.5.tbd; sourceTree = SDKROOT; };
-		B93F6D6D1CB0135800198991 /* React-Native-Webview-Bridge.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "React-Native-Webview-Bridge.xcodeproj"; path = "../node_modules/react-native-webview-bridge/ios/React-Native-Webview-Bridge.xcodeproj"; sourceTree = "<group>"; };
-		B9FF6C2B1C7B5C0400F7373F /* RNFS.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNFS.xcodeproj; path = "../node_modules/react-native-fs/RNFS.xcodeproj"; sourceTree = "<group>"; };
-		B9FF6C611C7C67BB00F7373F /* SQLite.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SQLite.xcodeproj; path = "../node_modules/react-native-sqlite-storage/src/ios/SQLite.xcodeproj"; sourceTree = "<group>"; };
-		B9FF6C681C7C683F00F7373F /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
+		B93F6D881CB1528C00198991 /* RNFS.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNFS.xcodeproj; path = "../node_modules/react-native-fs/RNFS.xcodeproj"; sourceTree = "<group>"; };
+		B93F6D981CB152AB00198991 /* RNZipArchive.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNZipArchive.xcodeproj; path = "../node_modules/react-native-zip-archive/RNZipArchive.xcodeproj"; sourceTree = "<group>"; };
+		B93F6D9E1CB152CB00198991 /* React-Native-Webview-Bridge.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "React-Native-Webview-Bridge.xcodeproj"; path = "../node_modules/react-native-webview-bridge/ios/React-Native-Webview-Bridge.xcodeproj"; sourceTree = "<group>"; };
+		B93F6DA71CB152FA00198991 /* libz.1.2.5.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.2.5.tbd; path = usr/lib/libz.1.2.5.tbd; sourceTree = SDKROOT; };
+		B93F6DA91CB153C200198991 /* SQLite.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SQLite.xcodeproj; path = "../node_modules/react-native-sqlite-storage/src/ios/SQLite.xcodeproj"; sourceTree = "<group>"; };
+		B93F6DB01CB1545800198991 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -182,12 +180,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B93F6D731CB0136E00198991 /* libReact-Native-Webview-Bridge.a in Frameworks */,
-				B93F6D6C1CAFB10200198991 /* libz.1.2.5.tbd in Frameworks */,
-				B93F6D6A1CAFAC7700198991 /* libRNZipArchive.a in Frameworks */,
-				B9FF6C691C7C683F00F7373F /* libsqlite3.0.tbd in Frameworks */,
-				B9FF6C671C7C680400F7373F /* libSQLite.a in Frameworks */,
-				B9FF6C3B1C7B5C9D00F7373F /* libRNFS.a in Frameworks */,
+				B93F6DB11CB1545800198991 /* libsqlite3.0.tbd in Frameworks */,
+				B93F6DAF1CB153CB00198991 /* libSQLite.a in Frameworks */,
+				B93F6DA81CB152FA00198991 /* libz.1.2.5.tbd in Frameworks */,
+				B93F6DA41CB152DD00198991 /* libReact-Native-Webview-Bridge.a in Frameworks */,
+				B93F6DA51CB152DD00198991 /* libRNFS.a in Frameworks */,
+				B93F6DA61CB152DD00198991 /* libRNZipArchive.a in Frameworks */,
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
 				00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */,
 				00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */,
@@ -280,7 +278,6 @@
 		13B07FAE1A68108700A75B9A /* apiAPP */ = {
 			isa = PBXGroup;
 			children = (
-				B91B4A2D1C7F3FA000B030C5 /* www */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -311,10 +308,10 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				B93F6D6D1CB0135800198991 /* React-Native-Webview-Bridge.xcodeproj */,
-				B93F6D641CAFAC4000198991 /* RNZipArchive.xcodeproj */,
-				B9FF6C611C7C67BB00F7373F /* SQLite.xcodeproj */,
-				B9FF6C2B1C7B5C0400F7373F /* RNFS.xcodeproj */,
+				B93F6DA91CB153C200198991 /* SQLite.xcodeproj */,
+				B93F6D9E1CB152CB00198991 /* React-Native-Webview-Bridge.xcodeproj */,
+				B93F6D981CB152AB00198991 /* RNZipArchive.xcodeproj */,
+				B93F6D881CB1528C00198991 /* RNFS.xcodeproj */,
 				146833FF1AC3E56700842450 /* React.xcodeproj */,
 				00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */,
 				00C302B51ABCB90400DB3ED1 /* RCTGeolocation.xcodeproj */,
@@ -340,7 +337,8 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
-				B9FF6C4A1C7C619800F7373F /* Frameworks */,
+				B93F6DB01CB1545800198991 /* libsqlite3.0.tbd */,
+				B93F6DA71CB152FA00198991 /* libz.1.2.5.tbd */,
 				13B07FAE1A68108700A75B9A /* apiAPP */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* apiAPPTests */,
@@ -359,43 +357,34 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		B93F6D651CAFAC4000198991 /* Products */ = {
+		B93F6D891CB1528C00198991 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				B93F6D691CAFAC4000198991 /* libRNZipArchive.a */,
+				B93F6D971CB1528D00198991 /* libRNFS.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		B93F6D6E1CB0135800198991 /* Products */ = {
+		B93F6D991CB152AB00198991 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				B93F6D721CB0135900198991 /* libReact-Native-Webview-Bridge.a */,
+				B93F6D9D1CB152AB00198991 /* libRNZipArchive.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		B9FF6C2C1C7B5C0400F7373F /* Products */ = {
+		B93F6D9F1CB152CB00198991 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				B9FF6C3A1C7B5C0500F7373F /* libRNFS.a */,
+				B93F6DA31CB152CB00198991 /* libReact-Native-Webview-Bridge.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		B9FF6C4A1C7C619800F7373F /* Frameworks */ = {
+		B93F6DAA1CB153C200198991 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				B93F6D6B1CAFB10200198991 /* libz.1.2.5.tbd */,
-				B9FF6C681C7C683F00F7373F /* libsqlite3.0.tbd */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		B9FF6C621C7C67BB00F7373F /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				B9FF6C661C7C67BB00F7373F /* libSQLite.a */,
+				B93F6DAE1CB153C200198991 /* libSQLite.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -452,9 +441,6 @@
 						CreatedOnToolsVersion = 6.2;
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
-					13B07F861A680F5B00A75B9A = {
-						DevelopmentTeam = UMT965PG94;
-					};
 				};
 			};
 			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "apiAPP" */;
@@ -506,24 +492,24 @@
 					ProjectRef = 139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */;
 				},
 				{
-					ProductGroup = B93F6D6E1CB0135800198991 /* Products */;
-					ProjectRef = B93F6D6D1CB0135800198991 /* React-Native-Webview-Bridge.xcodeproj */;
+					ProductGroup = B93F6D9F1CB152CB00198991 /* Products */;
+					ProjectRef = B93F6D9E1CB152CB00198991 /* React-Native-Webview-Bridge.xcodeproj */;
 				},
 				{
 					ProductGroup = 146834001AC3E56700842450 /* Products */;
 					ProjectRef = 146833FF1AC3E56700842450 /* React.xcodeproj */;
 				},
 				{
-					ProductGroup = B9FF6C2C1C7B5C0400F7373F /* Products */;
-					ProjectRef = B9FF6C2B1C7B5C0400F7373F /* RNFS.xcodeproj */;
+					ProductGroup = B93F6D891CB1528C00198991 /* Products */;
+					ProjectRef = B93F6D881CB1528C00198991 /* RNFS.xcodeproj */;
 				},
 				{
-					ProductGroup = B93F6D651CAFAC4000198991 /* Products */;
-					ProjectRef = B93F6D641CAFAC4000198991 /* RNZipArchive.xcodeproj */;
+					ProductGroup = B93F6D991CB152AB00198991 /* Products */;
+					ProjectRef = B93F6D981CB152AB00198991 /* RNZipArchive.xcodeproj */;
 				},
 				{
-					ProductGroup = B9FF6C621C7C67BB00F7373F /* Products */;
-					ProjectRef = B9FF6C611C7C67BB00F7373F /* SQLite.xcodeproj */;
+					ProductGroup = B93F6DAA1CB153C200198991 /* Products */;
+					ProjectRef = B93F6DA91CB153C200198991 /* SQLite.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -605,32 +591,32 @@
 			remoteRef = 832341B41AAA6A8300B99B32 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		B93F6D691CAFAC4000198991 /* libRNZipArchive.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libRNZipArchive.a;
-			remoteRef = B93F6D681CAFAC4000198991 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		B93F6D721CB0135900198991 /* libReact-Native-Webview-Bridge.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = "libReact-Native-Webview-Bridge.a";
-			remoteRef = B93F6D711CB0135900198991 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		B9FF6C3A1C7B5C0500F7373F /* libRNFS.a */ = {
+		B93F6D971CB1528D00198991 /* libRNFS.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libRNFS.a;
-			remoteRef = B9FF6C391C7B5C0500F7373F /* PBXContainerItemProxy */;
+			remoteRef = B93F6D961CB1528D00198991 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		B9FF6C661C7C67BB00F7373F /* libSQLite.a */ = {
+		B93F6D9D1CB152AB00198991 /* libRNZipArchive.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNZipArchive.a;
+			remoteRef = B93F6D9C1CB152AB00198991 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		B93F6DA31CB152CB00198991 /* libReact-Native-Webview-Bridge.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libReact-Native-Webview-Bridge.a";
+			remoteRef = B93F6DA21CB152CB00198991 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		B93F6DAE1CB153C200198991 /* libSQLite.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libSQLite.a;
-			remoteRef = B9FF6C651C7C67BB00F7373F /* PBXContainerItemProxy */;
+			remoteRef = B93F6DAD1CB153C200198991 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -647,7 +633,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B91B4A2E1C7F3FA000B030C5 /* www in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 			);
@@ -754,12 +739,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEAD_CODE_STRIPPING = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(SRCROOT)/../node_modules/react-native/React/**",
+					"$(SRCROOT)/../react-native/React",
 					"$(SRCROOT)/../../React",
 				);
 				INFOPLIST_FILE = apiAPP/Info.plist;
@@ -773,11 +758,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(SRCROOT)/../node_modules/react-native/React/**",
+					"$(SRCROOT)/../react-native/React",
 					"$(SRCROOT)/../../React",
 				);
 				INFOPLIST_FILE = apiAPP/Info.plist;

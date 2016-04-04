@@ -13,6 +13,7 @@ import React, {
     Image,
     Dimensions
 } from 'react-native';
+import getImageSource from '../imageSource';
 
 var ds = new ListView.DataSource({
     rowHasChanged: (r1, r2) => r1 !== r2,
@@ -73,8 +74,7 @@ var CommonList = React.createClass({
         if (typeof  this.props.renderRow == 'function') {
             return this.props.renderRow(rowData, sectionID, rowID);
         } else {
-            var imgSource = require('../Resources/jQuery.png');
-
+            var imgSource = getImageSource(rowData + '.png');
             return (
                 <TouchableOpacity onPress={() => this._pressRow(rowData,rowID)}>
                     <View style={styles.row}>

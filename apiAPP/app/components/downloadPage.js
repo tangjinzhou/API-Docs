@@ -13,6 +13,10 @@ import React, {
     Animated
 } from 'react-native';
 
+import {bindActionCreators} from 'redux';
+import * as dashActions from '../actions/dashActions';
+import { connect } from 'react-redux';
+
 import CommonList from './commonList';
 import SearchText from './searchText';
 import SearchAPiPage from './searchApiPage';
@@ -32,7 +36,6 @@ var DocSets = React.createClass({
     mixins: [TimerMixin],
     getInitialState: function () {
         this.ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-
         return {docSetsList: []};
     },
     componentDidMount: function () {
@@ -42,7 +45,6 @@ var DocSets = React.createClass({
             .then((responseJson) => {
                 var data = responseJson.data;
                 queryDB.getMyDocsNameList().then(function (mydocs) {
-                    console.log(mydocs);
                     for (let i = 0; i < data.length; i++) {
                         data[i].download = 0;
                         for (let j = 0; j < mydocs.length; j++) {
@@ -54,7 +56,6 @@ var DocSets = React.createClass({
                     }
                     _this.setState({docSetsList: data});
                 })
-
             })
             .catch((error) => {
                 console.warn(error);
@@ -87,9 +88,7 @@ var DocSets = React.createClass({
     },
 
     renderRow: function (rowData, sectionID, rowID) {
-        console.log(rowID);
         var docset = this.state.docSetsList[rowID];
-        var icon = '../Resources/' + docset.icon;
         var imgSource = getImageSource(docset.icon);
         var rowRight = <TouchableOpacity onPress={() => this.pressRow(rowData,rowID)}>
             <Image style={[styles.thumb]} source={getImageSource('download.png')}/>
@@ -153,16 +152,17 @@ var DocSets = React.createClass({
                     _this.setState({docSetsList: _this.state.docSetsList});
                 }).then(function () {
                     ZipArchive.unzip(file, target).then(() => {
-                            console.log('unzip completed!')
                             queryDB.addMyDocs(name).then(function () {
                                 _this.state.docSetsList[rowID].download = 1;
                                 _this.setState({docSetsList: _this.state.docSetsList});
+                                queryDB.getMyDocsNameList().then(function (res) {
+                                    _this.props.actions.dispatchMydocsUpdate({page: 'startPage', value: res});
+                                })
                             })
                         })
                         .catch((error) => {
                             console.log(error)
                         })
-
                 })
             }
         })
@@ -198,5 +198,13 @@ var styles = StyleSheet.create({
     },
 });
 
-export default DocSets;
+function getState(state) {
+    //state = Object.assign({}, state.search);
+    return {state: state.search}
+}
+export default connect(getState,
+    (dispatch) => ({
+        actions: bindActionCreators(dashActions, dispatch)
+    })
+)(DocSets);
 

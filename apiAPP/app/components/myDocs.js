@@ -22,21 +22,25 @@ var NavbarWrapper = require('./navbar');
 class MyDocs extends Component {
     constructor(props) {
         super(props);
+        queryDB.getMyDocsNameList().then(function (res) {
+            props.actions.dispatchMydocsUpdate({page: 'startPage', value: res});
+        });
         this.state = {
-            myDocsNameList: []
+            myDocsNameList: props.state.myDocsNameList || [],
         }
     }
 
     componentDidMount() {
-        var _this = this;
-        queryDB.getMyDocsNameList(this.props).then(function (res) {
-            _this.setState({myDocsNameList: res});
-        });
+
     }
 
+    shouldComponentUpdate(nextProps, nextState) {
+        return this.props.state.myDocsNameList != nextProps.state.myDocsNameList;
+    }
     render() {
-        var {navigator, showResultPage,route} = this.props;
-        this.myDocsNameList = this.state.myDocsNameList;
+        var {navigator, state,route} = this.props;
+        var _this = this;
+        this.myDocsNameList = state.myDocsNameList;
         var dataSource = listData.getDataSource(route, this.myDocsNameList);
         this.navigator = navigator;
         this.title = route.title;
@@ -53,6 +57,9 @@ class MyDocs extends Component {
         );
     }
 
+    popCallback() {
+        this.props.actions.dispatchHideResultPage({page: 'oneDoc'});
+    }
     pressRow(rowData, rowId) {
         var NavComponent = OneDoc;
         var leftTitle = this.title;
@@ -66,7 +73,7 @@ class MyDocs extends Component {
                 leftTitle: 'Docsets',
                 component: NavComponent,
                 navbarPassProps: {leftTitle: 'Docsets', title: rowData},
-                passProps: {docPath: docPath, oneDocApiList: res}
+                passProps: {docPath: docPath, oneDocApiList: res, popCallback: _this.popCallback.bind(_this)}
             })
         });
 

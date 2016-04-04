@@ -17,9 +17,12 @@ var openCB = ()=> {
 //var db = SQLite.openDatabase({name:"docSet.dsidx",createFromLocation: 1}, openCB, errorCB);
 class QueryDB {
 
-    getSearchIndex(props, searchText) {
-        var db = SQLite.openDatabase("docset/jQuery/Contents/Resources/docSet.dsidx", openCB, errorCB);
-        var {searchIndex} = props;
+    getSearchIndex(searchText, docName) {
+        var dbName = 'docset/' + docName + '/' + docName + '.docset/Contents/Resources/docSet.dsidx';
+        if (docName) {
+            dbName = 'docset/' + docName + '/' + docName + '.docset/Contents/Resources/docSet.dsidx';
+        }
+        var db = SQLite.openDatabase(dbName, openCB, errorCB);
         if (searchText.trim() == '') {
             return new Promise(function (resolve, reject) {
                 resolve([]);
@@ -32,6 +35,7 @@ class QueryDB {
                         var res = [];
                         for (let i = 0; i < len; i++) {
                             let row = results.rows.item(i);
+                            row.docName = docName;
                             res.push(row);
                         }
                         resolve(res);

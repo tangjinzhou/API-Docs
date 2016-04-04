@@ -62,6 +62,7 @@ export default class Dash extends Component {
 
 var NavigationBarRouteMapper = {
     LeftButton: function (route, navigator, index, navState) {
+
         if (index === 0) {
             return (
                 <TouchableOpacity
@@ -83,9 +84,15 @@ var NavigationBarRouteMapper = {
 
         var previousRoute = navState.routeStack[index - 1];
         var title = route.leftTitle || route.title;
+
         return (
             <TouchableOpacity
-                onPress={() => navigator.pop()}
+                onPress={function(){
+                    if(route.passProps && route.passProps.popCallback){
+                        route.passProps.popCallback()
+                    };
+                    navigator.pop();}
+                }
                 style={styles.navBarButton}>
                 <Text style={[styles.navBarText, styles.navBarButtonText]}>
                     {title}
@@ -95,7 +102,7 @@ var NavigationBarRouteMapper = {
     },
 
     RightButton: function (route, navigator, index, navState) {
-        if (index === 0) {
+        /*if (index === 0) {
             return (
                 <TouchableOpacity
                     onPress={() => navigator.pop()}
@@ -105,7 +112,7 @@ var NavigationBarRouteMapper = {
                     </Text>
                 </TouchableOpacity>
             );
-        }
+         }*/
 
     },
 

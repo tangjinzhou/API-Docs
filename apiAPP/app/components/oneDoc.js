@@ -49,7 +49,7 @@ var OneDoc = React.createClass({
         return (
             <View style={styles.container}>
                 <TouchableOpacity
-                    onPress={()=>actions.dispatchShowResultPage('oneDoc')}
+                    onPress={()=>actions.dispatchShowResultPage({page:'oneDoc'})}
                 >
                     <View>
                         {!showResultPage && <SearchText

@@ -21,7 +21,7 @@ var SearchText = React.createClass({
     },
     searchIndexChange: function (text) {
         var _this = this;
-        queryDB.getSearchIndex(this.props, text).then(function (res) {
+        queryDB.getSearchIndex(text, this.props.route.title).then(function (res) {
             _this.props.updateState(res);
         });
         this.setState({searchText: text});
@@ -42,7 +42,8 @@ var SearchText = React.createClass({
                     editable={editable}
                     autoFocus={autoFocus || false}
                 />
-                {editable && <TouchableOpacity onPress={()=>actions.dispatchHideResultPage(this.props.actionPage)}>
+                {editable &&
+                <TouchableOpacity onPress={()=>actions.dispatchHideResultPage({page:this.props.actionPage})}>
                     <Text style={styles.cancelBtn}>取消</Text>
                 </TouchableOpacity>}
             </View>

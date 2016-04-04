@@ -14,16 +14,16 @@ export function dispatchSearchTypeChange(value) {
   }
 }
 
-export function dispatchShowResultPage(page) {
+export function dispatchShowResultPage(opt) {
     return {
-        page: page,
+        page: opt.page,
         type: types.SHOWRESULTPAGE
     }
 }
 
-export function dispatchHideResultPage(page) {
+export function dispatchHideResultPage(opt) {
     return {
-        page: page,
+        page: opt.page,
         type: types.HIDERESULTPAGE
     }
 }
@@ -36,10 +36,12 @@ export function dispatchSearchIndexUpdate(value) {
     }
 }
 
-export function dispatchMydocsUpdate(value) {
+export function dispatchMydocsUpdate(opt) {
+    console.log(opt);
     return {
+        page: opt.page,
         type: types.MYDOCSUPDATE,
-        value: value
+        value: opt.value
     }
 }
 

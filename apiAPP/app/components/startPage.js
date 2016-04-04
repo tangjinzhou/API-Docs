@@ -14,17 +14,19 @@ import MyDocs from './myDocs';
 import ResultPage from '../components/resultPage';
 import SearchText from './searchText';
 import queryDB from './queryDB';
+import GLOBAL from '../global';
 
 export default class StartPage extends Component {
     constructor(props) {
         super(props);
     }
 
-    shouldComponentUpdate(nextProps, nextState) {
-        return this.props.state.showResultPage !== nextProps.state.showResultPage;
-    }
+    /*shouldComponentUpdate(nextProps, nextState) {
+     return this.props.state !== nextProps.state;
+     }*/
     render() {
         const { state, actions} = this.props;
+        GLOBAL.ACTIONS.StartPage = actions;
         var showResultPage = state.showResultPage;
         return (
             <View style={styles.container}>
@@ -48,7 +50,7 @@ export default class StartPage extends Component {
     }
 
     showSearchApiPage() {
-        this.props.actions.dispatchShowResultPage('startPage');
+        this.props.actions.dispatchShowResultPage({page: 'startPage'});
     }
 }
 
@@ -60,8 +62,8 @@ var styles = StyleSheet.create({
 });
 
 function getState(state) {
-    state = Object.assign({}, state.search);
-    return {state: state}
+    //state = Object.assign({}, state.search);
+    return {state: state.search}
 }
 export default connect(getState,
     (dispatch) => ({

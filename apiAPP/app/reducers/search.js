@@ -2,7 +2,7 @@ import * as types from '../actions/actionTypes';
 
 const initialState = {
     showResultPage: false,
-    testA: 2,
+    myDocsNameList: [],
 };
 
 export default function search(state = initialState, action = {}) {
@@ -23,6 +23,7 @@ export default function search(state = initialState, action = {}) {
                     searchIndex: []
                 }
             case types.MYDOCSUPDATE:
+                console.log(action);
                 return {
                     ...state,
                     myDocsNameList: action.value
