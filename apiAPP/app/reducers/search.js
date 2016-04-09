@@ -23,7 +23,6 @@ export default function search(state = initialState, action = {}) {
                     searchIndex: []
                 }
             case types.MYDOCSUPDATE:
-                console.log(action);
                 return {
                     ...state,
                     myDocsNameList: action.value

@@ -73,7 +73,12 @@ class MyDocs extends Component {
                 leftTitle: 'Docsets',
                 component: NavComponent,
                 navbarPassProps: {leftTitle: 'Docsets', title: rowData},
-                passProps: {docPath: docPath, oneDocApiList: res, popCallback: _this.popCallback.bind(_this)}
+                passProps: {
+                    docPath: docPath,
+                    docName: rowData,
+                    oneDocApiList: res,
+                    popCallback: _this.popCallback.bind(_this)
+                }
             })
         });
 

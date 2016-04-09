@@ -15,10 +15,6 @@ import React, {
 } from 'react-native';
 import getImageSource from '../imageSource';
 
-var ds = new ListView.DataSource({
-    rowHasChanged: (r1, r2) => r1 !== r2,
-    sectionHeaderHasChanged: (h1, h2) => h1 !== h2,
-});
 
 var CommonList = React.createClass({
     getInitialState: function () {
@@ -40,6 +36,7 @@ var CommonList = React.createClass({
         var listViewProps = {
             automaticallyAdjustContentInsets: true,
             keyboardDismissMode: 'on-drag',
+            keyboardShouldPersistTaps: true,
             dataSource: dataSource,
             renderRow: this._renderRow,
             initialListSize: 15,

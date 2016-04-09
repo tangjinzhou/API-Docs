@@ -21,7 +21,8 @@ var SearchText = React.createClass({
     },
     searchIndexChange: function (text) {
         var _this = this;
-        queryDB.getSearchIndex(text, this.props.route.title).then(function (res) {
+        var docName = this.props.route.passProps ? this.props.route.passProps.docName : null;
+        queryDB.getSearchIndex(text, docName).then(function (res) {
             _this.props.updateState(res);
         });
         this.setState({searchText: text});

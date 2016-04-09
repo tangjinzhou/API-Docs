@@ -71,7 +71,7 @@ var NavigationBarRouteMapper = {
                         title: 'Download',
                         leftTitle: 'Done',
                         component: DownloadPage,
-                        //configureScene: Navigator.SceneConfigs.FloatFromBottom
+                        configureScene: Navigator.SceneConfigs.FloatFromBottom
                         }
                     )}
                     style={styles.navBarButton}>

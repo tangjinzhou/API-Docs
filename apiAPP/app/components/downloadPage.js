@@ -134,7 +134,6 @@ var DocSets = React.createClass({
     },
 
     pressRow: function (rowData, rowID) {
-        console.log(rowData, rowID);
         this.state.docSetsList[rowID].download = 2; //2:下载中 1:已下载 0:未下载
         this.state.docSetsList[rowID].percent = '0%'; //2:下载中 1:已下载 0:未下载
         this.setState({docSetsList: this.state.docSetsList});
@@ -148,11 +147,13 @@ var DocSets = React.createClass({
                 RNFS.downloadFile(downloadurl, file, function () {
                 }, function (res) {
                     let percent = parseInt(res.bytesWritten / res.contentLength * 100, 10) + '%'; //2:下载中 1:已下载 0:未下载
-                    _this.state.docSetsList[rowID].percent = percent == '100%' ? '解压中' : percent;
+                    _this.state.docSetsList[rowID].percent = percent == '100%' ? '构建中' : percent;
                     _this.setState({docSetsList: _this.state.docSetsList});
                 }).then(function () {
                     ZipArchive.unzip(file, target).then(() => {
-                            queryDB.addMyDocs(name).then(function () {
+                            const createMainIndex = queryDB.createMainIndex(name);
+                            const addMyDocs = queryDB.addMyDocs(name);
+                            Promise.all([createMainIndex, addMyDocs]).then(function () {
                                 _this.state.docSetsList[rowID].download = 1;
                                 _this.setState({docSetsList: _this.state.docSetsList});
                                 queryDB.getMyDocsNameList().then(function (res) {

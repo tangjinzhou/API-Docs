@@ -1,6 +1,6 @@
 'use strict';
 
-import React, { Component,View,StyleSheet,PixelRatio,Dimensions,ListView,Navigator} from 'react-native';
+import React, { Component,View,StyleSheet,PixelRatio,Dimensions,ListView,Navigator,TouchableOpacity,Text} from 'react-native';
 import {bindActionCreators} from 'redux';
 import { connect } from 'react-redux';
 
@@ -28,7 +28,6 @@ class ResultPage extends Component {
     render() {
         var {route, state, actions, actionPage, navigator} = this.props;
         var dataSource = listData.getDataSource(route, this.state.searchIndexList);
-        this.docPath = 'docset/jQuery/Contents/Resources/';
         this.navigator = navigator;
         var listContainerStyles = {};
         if (dataSource.getRowCount() > 0) {
@@ -50,8 +49,6 @@ class ResultPage extends Component {
             </View>
         );
     }
-
-
     pressRow(rowData, rowId) {
         var NavComponent = ApiInfo;
         var leftTitle = '<...';

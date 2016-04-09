@@ -29,7 +29,6 @@ export function dispatchHideResultPage(opt) {
 }
 
 export function dispatchSearchIndexUpdate(value) {
-    console.log(value);
     return {
         type: types.SEARCHINDEXUPDATE,
         value: value
@@ -37,7 +36,6 @@ export function dispatchSearchIndexUpdate(value) {
 }
 
 export function dispatchMydocsUpdate(opt) {
-    console.log(opt);
     return {
         page: opt.page,
         type: types.MYDOCSUPDATE,
