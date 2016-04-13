@@ -32,6 +32,8 @@ const DocumentDirectoryPath = RNFS.DocumentDirectoryPath;
 import config from '../config';
 const GET_DOCSETS_URL = config.SERVERBASEURL + 'docsets';
 
+//http://frankfurt.kapeli.com/feeds/zzz/versions/AngularJS/1.5.2/AngularJS.tgz
+
 var DocSets = React.createClass({
     mixins: [TimerMixin],
     getInitialState: function () {
