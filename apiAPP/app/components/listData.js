@@ -18,9 +18,9 @@ class ListData {
         return dataBlob;
     }
 
-    getDataSourceWithSection(searchText, searchIndexRes) {
+    getDataSourceWithSection(route, searchIndexRes = []) {
         var getSectionData = (dataBlob, sectionID) => {
-            return dataBlob[sectionID];
+            return sectionID;
         };
         var getRowData = (dataBlob, sectionID, rowID) => {
             return dataBlob[rowID];
@@ -32,26 +32,25 @@ class ListData {
             rowHasChanged: (row1, row2) => row1 !== row2,
             sectionHeaderHasChanged: (s1, s2) => s1 !== s2,
         });
-        return dataSource.cloneWithRowsAndSections(...this._genRowsWithSection(searchText, searchIndexRes));
+        return dataSource.cloneWithRowsAndSections(...this._genRowsWithSection(searchIndexRes));
     }
 
-    _genRowsWithSection(searchText, searchIndexRes) {
-        var dataBlob = {};
+    _genRowsWithSection(searchIndexRes) {
+        var dataBlob = [];
         var sectionIDs = [];
         var rowIDs = [];
-        if (searchText !== '') {
-            for (var ii = 0; ii < 10; ii++) {
-                var sectionName = 'Section ' + ii;
-                sectionIDs.push(sectionName);
-                dataBlob[sectionName] = sectionName;
-                rowIDs[ii] = [];
-
-                for (var jj = 0; jj < 4; jj++) {
-                    var rowName = searchText + ii + ', R' + jj;
-                    rowIDs[ii].push(rowName);
-                    dataBlob[rowName] = rowName;
-                }
+        var len = searchIndexRes.length;
+        for (var ii = 0; ii < len; ii++) {
+            var pressedText = ii;
+            var docName = searchIndexRes[ii].docName;
+            var rowId = sectionIDs.length - 1;
+            if (sectionIDs.indexOf(docName) === -1) {
+                sectionIDs.push(docName);
+                rowId = sectionIDs.length - 1;
+                rowIDs[rowId] = [];
             }
+            dataBlob.push(searchIndexRes[ii].name);
+            rowIDs[rowId].push(ii);
         }
         return [dataBlob, sectionIDs, rowIDs];
     }

@@ -44,6 +44,7 @@ export default class StartPage extends Component {
                 {showResultPage && <ResultPage
                     {...this.props}
                     actionPage={'startPage'}
+                    hideSection={false}
                 />}
             </View>
         );

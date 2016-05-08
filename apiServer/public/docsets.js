@@ -3,8 +3,8 @@ var docsets = [{
     "path": "DocSets/jQuery.zip",
     "icon": "jQuery.png"
 }, {
-    "name": "AngularJs",
-    "path": "DocSets/AngularJs.zip",
+    "name": "AngularJS",
+    "path": "DocSets/AngularJS.zip",
     "icon": "angularjs.png"
 }];
 module.exports = docsets;

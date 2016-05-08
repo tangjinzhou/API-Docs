@@ -7,7 +7,9 @@ import React, {
     ListView,
     TouchableOpacity,
     Navigator,
-    Animated
+    Animated,
+    Image,
+    Text
 } from 'react-native';
 
 import {bindActionCreators} from 'redux';
@@ -21,6 +23,7 @@ import listData from './listData';
 import queryDB from './queryDB';
 import RNFS from 'react-native-fs';
 import ResultPage from '../components/resultPage';
+import getImageSource from '../imageSource';
 var TimerMixin = require('react-timer-mixin');
 
 const DocumentDirectoryPath = RNFS.DocumentDirectoryPath;
@@ -62,6 +65,7 @@ var OneDoc = React.createClass({
                     dataSource={dataSource}
                     hideSection={true}
                     pressRow={this.pressRow}
+                    renderRow={this.renderRow}
                 />
                 {showResultPage && <ResultPage
                     {...this.props}
@@ -70,7 +74,22 @@ var OneDoc = React.createClass({
             </View>
         );
     },
-
+    renderRow: function (rowData, sectionID, rowID) {
+        let type = this.oneDocApiList[rowID].type;
+        return (
+            <TouchableOpacity onPress={() => this.pressRow(rowData,rowID)}>
+                <View style={styles.row}>
+                    <Image style={styles.thumb} source={getImageSource(type)}/>
+                    <Text style={styles.text}>
+                        {rowData}
+                    </Text>
+                    <Text style={styles.rightArrow}>
+                        >
+                    </Text>
+                </View>
+            </TouchableOpacity>
+        );
+    },
     pressRow: function (rowData, rowId) {
         var NavComponent = ApiInfo;
         var leftTitle = '<...';
@@ -97,6 +116,27 @@ var styles = StyleSheet.create({
     searchText: {
         paddingTop: 30,
     },
+    row: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        padding: 10,
+        backgroundColor: '#F6F6F6',
+    },
+    thumb: {
+        borderRadius: 3,
+        marginRight: 5,
+        width: 16,
+        height: 16,
+    },
+    text: {
+        flex: 1,
+    },
+    rightArrow: {
+        color: 'grey',
+        fontSize: 16,
+        fontWeight: '400',
+        paddingRight: 10,
+    }
 });
 
 export default OneDoc;

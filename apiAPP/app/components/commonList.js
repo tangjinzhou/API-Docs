@@ -31,14 +31,14 @@ var CommonList = React.createClass({
         var dataSource = this.props.dataSource || this.state.dataSource;
         var hideSection = this.props.hideSection || false;
         this.navigator = this.props.navigator;
-        this.pressRow = this.props.pressRow;
+        // this.pressRow = this.props.pressRow;
         //var renderRow = this.props.renderRow || this._renderRow;
         var listViewProps = {
             automaticallyAdjustContentInsets: true,
             keyboardDismissMode: 'on-drag',
             keyboardShouldPersistTaps: true,
             dataSource: dataSource,
-            renderRow: this._renderRow,
+            renderRow: this.renderRow,
             initialListSize: 15,
             pageSize: 15,
             renderScrollComponent: props => <RecyclerViewBackedScrollView {...props} />,
@@ -61,19 +61,18 @@ var CommonList = React.createClass({
         );
     },
 
-    _pressRow: function (rowData, rowID) {
-        console.log(rowData);
-        if (typeof this.pressRow == 'function') {
-            this.pressRow(rowData, rowID);
+    pressRow: function (rowData, rowID) {
+        if (typeof this.props.pressRow == 'function') {
+            this.props.pressRow(rowData, rowID);
         }
     },
-    _renderRow: function (rowData, sectionID, rowID) {
+    renderRow: function (rowData, sectionID, rowID) {
         if (typeof  this.props.renderRow == 'function') {
             return this.props.renderRow(rowData, sectionID, rowID);
         } else {
             var imgSource = getImageSource(rowData + '.png');
             return (
-                <TouchableOpacity onPress={() => this._pressRow(rowData,rowID)}>
+                <TouchableOpacity onPress={() => this.pressRow(rowData,rowID)}>
                     <View style={styles.row}>
                         <Image style={styles.thumb} source={imgSource}/>
                         <Text style={styles.text}>

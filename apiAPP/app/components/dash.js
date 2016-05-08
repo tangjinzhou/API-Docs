@@ -118,7 +118,7 @@ var NavigationBarRouteMapper = {
 
     Title: function (route, navigator, index, navState) {
         return (
-            <Text style={[styles.navBarText, styles.navBarTitleText]}>
+            <Text style={[styles.navBarText, styles.navBarTitleText]} numberOfLines={1}>
                 {route.title}
             </Text>
         );
@@ -131,7 +131,9 @@ var styles = StyleSheet.create({
         height: Dimensions.get('window').height,
     },
 
-    navContainer: {},
+    navContainer: {
+        justifyContent: 'space-between',
+    },
     showResultPage: {
         //position: 'relative',
         //top: -65,
@@ -155,6 +157,7 @@ var styles = StyleSheet.create({
         borderBottomColor: '#CDCDCD',
     },
     navBarText: {
+        flex: 1,
         fontSize: 16,
         marginVertical: 10,
         //height: 0,

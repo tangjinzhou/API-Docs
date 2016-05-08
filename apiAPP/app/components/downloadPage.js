@@ -10,7 +10,8 @@ import React, {
     Image,
     Text,
     Easing,
-    Animated
+    Animated,
+    Alert
 } from 'react-native';
 
 import {bindActionCreators} from 'redux';
@@ -27,6 +28,8 @@ import ZipArchive from 'react-native-zip-archive';
 import ResultPage from '../components/resultPage';
 import getImageSource from '../imageSource';
 var TimerMixin = require('react-timer-mixin');
+let xml = require('react-native').NativeModules.RNMXml;
+
 
 const DocumentDirectoryPath = RNFS.DocumentDirectoryPath;
 import config from '../config';
@@ -152,20 +155,35 @@ var DocSets = React.createClass({
                     _this.state.docSetsList[rowID].percent = percent == '100%' ? '构建中' : percent;
                     _this.setState({docSetsList: _this.state.docSetsList});
                 }).then(function () {
-                    ZipArchive.unzip(file, target).then(() => {
+                    ZipArchive.unzip(file, target).then(function () {
+                        return queryDB.createMainIndex(name);
+                    }).then(function () {
+                        return queryDB.addMyDocs(name);
+                    }).then(function () {
+                        return queryDB.getMyDocsNameList();
+                    }).then(function (res) {
+                        _this.props.actions.dispatchMydocsUpdate({page: 'startPage', value: res});
+                        _this.state.docSetsList[rowID].download = 1;
+                        _this.setState({docSetsList: _this.state.docSetsList});
+                    }).catch((error) => {
+                    })
+                    /*ZipArchive.unzip(file, target).then(() => {
                             const createMainIndex = queryDB.createMainIndex(name);
-                            const addMyDocs = queryDB.addMyDocs(name);
-                            Promise.all([createMainIndex, addMyDocs]).then(function () {
-                                _this.state.docSetsList[rowID].download = 1;
-                                _this.setState({docSetsList: _this.state.docSetsList});
+                     createMainIndex.then(function () {
+                     queryDB.addMyDocs(name).then(function(){
+                     _this.state.docSetsList[rowID].download = 1;
+                     _this.setState({docSetsList: _this.state.docSetsList});
+                     Promise.resolve();
+                     });
+                     }).then(function(){
                                 queryDB.getMyDocsNameList().then(function (res) {
                                     _this.props.actions.dispatchMydocsUpdate({page: 'startPage', value: res});
                                 })
                             })
                         })
                         .catch((error) => {
-                            console.log(error)
-                        })
+                     console.error(error)
+                     })*/
                 })
             }
         })

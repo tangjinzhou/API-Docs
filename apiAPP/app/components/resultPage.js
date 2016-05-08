@@ -1,6 +1,6 @@
 'use strict';
 
-import React, { Component,View,StyleSheet,PixelRatio,Dimensions,ListView,Navigator,TouchableOpacity,Text} from 'react-native';
+import React, { Component,View,StyleSheet,PixelRatio,Dimensions,ListView,Navigator,TouchableOpacity,Text,Image} from 'react-native';
 import {bindActionCreators} from 'redux';
 import { connect } from 'react-redux';
 
@@ -11,7 +11,7 @@ import ApiInfo from './apiInfo';
 import RNFS from 'react-native-fs';
 var TimerMixin = require('react-timer-mixin');
 var NavbarWrapper = require('./navbar');
-
+import getImageSource from '../imageSource';
 const DocumentDirectoryPath = RNFS.DocumentDirectoryPath;
 
 class ResultPage extends Component {
@@ -26,14 +26,15 @@ class ResultPage extends Component {
         this.setState({searchIndexList: res})
     }
     render() {
-        var {route, state, actions, actionPage, navigator} = this.props;
-        var dataSource = listData.getDataSource(route, this.state.searchIndexList);
+        var {route, state, actions, actionPage, navigator, hideSection} = this.props;
+        var dataSource = listData.getDataSourceWithSection(route, this.state.searchIndexList);
         this.navigator = navigator;
         var listContainerStyles = {};
         if (dataSource.getRowCount() > 0) {
             listContainerStyles.opacity = 1;
             listContainerStyles.backgroundColor = '#EAEAEA';
         }
+        hideSection = hideSection === undefined ? true : false;
         return (
             <View style={styles.container}>
                 <SearchText {...this.props} updateState={this.updateState.bind(this)} style={styles.searchText}
@@ -42,11 +43,31 @@ class ResultPage extends Component {
                     <CommonList
                         {...this.props}
                         dataSource={dataSource}
-                        hideSection={true}
-                        pressRow={this.pressRow.bind(this)}
+                        hideSection={hideSection}
+                        //pressRow={this.pressRow.bind(this)}
+                        renderRow={this.renderRow.bind(this)}
                     />
                 </View>
             </View>
+        );
+    }
+
+    renderRow(rowData, sectionID, rowID) {
+        let type = this.state.searchIndexList[rowID].type;
+        var imgSource = getImageSource(sectionID);
+        return (
+            <TouchableOpacity onPress={() => this.pressRow(rowData,rowID)}>
+                <View style={styles.row}>
+                    <Image style={styles.thumb} source={imgSource}/>
+                    <Image style={styles.thumb} source={getImageSource(type)}/>
+                    <Text style={styles.text}>
+                        {rowData}
+                    </Text>
+                    <Text style={styles.rightArrow}>
+                        >
+                    </Text>
+                </View>
+            </TouchableOpacity>
         );
     }
     pressRow(rowData, rowId) {
@@ -78,6 +99,27 @@ var styles = StyleSheet.create({
     searchText: {
         //paddingTop: 95,
     },
+    row: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        padding: 10,
+        backgroundColor: '#F6F6F6',
+    },
+    thumb: {
+        borderRadius: 3,
+        marginRight: 5,
+        width: 16,
+        height: 16,
+    },
+    text: {
+        flex: 1,
+    },
+    rightArrow: {
+        color: 'grey',
+        fontSize: 16,
+        fontWeight: '400',
+        paddingRight: 10,
+    }
 });
 
 export default ResultPage;

@@ -1,4 +1,7 @@
 'use strict';
+import React, {
+    Alert
+} from 'react-native';
 import RNFS from 'react-native-fs';
 import SQLite from 'react-native-sqlite-storage';
 
@@ -10,7 +13,7 @@ var successCB = () => {
     console.log("SQL executed fine");
 };
 
-var openCB = ()=> {
+function openCB() {
     console.log("Database OPENED");
 };
 //var db = SQLite.openDatabase("docset/jQuery/Contents/Resources/docSet.dsidx", openCB, errorCB);
@@ -18,16 +21,17 @@ var openCB = ()=> {
 class QueryDB {
     createMainIndex(docName) {
         var dbName = 'docset/' + docName + '/' + docName + '.docset/Contents/Resources/docSet.dsidx';
-        var db = SQLite.openDatabase(dbName, openCB, errorCB);
-
-        var mainDB = SQLite.openDatabase("mainIndex.dsidx", openCB, errorCB);
         return new Promise(function (resolve, reject) {
+            var db = SQLite.openDatabase(dbName, openCB, errorCB);
             db.transaction((tx) => {
                 tx.executeSql('SELECT * FROM searchIndex', [], (tx, results) => {
                     resolve(results.rows);
+                }, function (error) {
                 });
+            }, function (err) {
             })
         }).then(function (res) {
+            var mainDB = SQLite.openDatabase("mainIndex.dsidx", openCB, errorCB);
             mainDB.transaction((tx) => {
                 tx.executeSql('CREATE TABLE IF NOT EXISTS searchIndex (id integer primary key, name text,type text, path text, docName text)', [], function () {
                 }, function () {
